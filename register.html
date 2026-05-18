@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng ký - Quang Mobile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-page">
+        <div class="auth-bg"></div>
+        <div class="auth-container">
+            <a href="index.html" class="auth-logo">
+                <span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                Quang<span>Mobile</span>
+            </a>
+            
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>Đăng ký tài khoản</h1>
+                    <p>Tạo tài khoản để mua sắm dễ dàng và nhận ưu đãi</p>
+                </div>
+                
+                <form id="registerForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="full_name"><i class="fas fa-user"></i> Họ và tên</label>
+                        <input type="text" id="full_name" name="full_name" required placeholder="Nguyễn Văn A">
+                    </div>
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="email" name="email" required placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="phone"><i class="fas fa-phone"></i> Số điện thoại</label>
+                        <input type="tel" id="phone" name="phone" placeholder="0123 456 789">
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> Mật khẩu</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" name="password" required minlength="6" placeholder="Tối thiểu 6 ký tự">
+                            <button type="button" class="toggle-password"><i class="far fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm_password"><i class="fas fa-lock"></i> Xác nhận mật khẩu</label>
+                        <input type="password" id="confirm_password" name="confirm_password" required minlength="6" placeholder="Nhập lại mật khẩu">
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" required> Tôi đồng ý với <a href="#">điều khoản dịch vụ</a>
+                        </label>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-user-plus"></i> Đăng ký
+                    </button>
+                </form>
+                
+                <div class="auth-footer">
+                    Đã có tài khoản? <a href="login.html">Đăng nhập</a>
+                </div>
+            </div>
+            
+            <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Về trang chủ</a>
+        </div>
+    </div>
+    
+    <div class="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div class="toast-message">Thành công!</div>
+    </div>
+    
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        document.querySelector('.toggle-password').addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            const icon = this.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        });
+        
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const data = Object.fromEntries(new FormData(e.target));
+            
+            if (data.password !== data.confirm_password) {
+                showToast('Mật khẩu xác nhận không khớp', 'error');
+                return;
+            }
+            
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
+            btn.disabled = true;
+            
+            try {
+                const res = await API.register({
+                    email: data.email,
+                    password: data.password,
+                    full_name: data.full_name,
+                    phone: data.phone
+                });
+                Auth.setToken(res.token);
+                Auth.setUser(res.user);
+                showToast('Đăng ký thành công!');
+                setTimeout(() => window.location.href = 'index.html', 800);
+            } catch (err) {
+                showToast(err.message || 'Đăng ký thất bại', 'error');
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            }
+        });
+        
+        if (Auth.isLoggedIn()) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

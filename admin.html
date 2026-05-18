@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quản trị - Quang Mobile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/shop.css">
+    <link rel="stylesheet" href="css/admin.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <aside class="admin-sidebar">
+            <a href="index.html" class="admin-logo">
+                <span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                <span>Quang<strong>Mobile</strong></span>
+            </a>
+            <nav class="admin-nav">
+                <a href="#" class="active" data-tab="dashboard"><i class="fas fa-tachometer-alt"></i> Tổng quan</a>
+                <a href="#" data-tab="orders"><i class="fas fa-shopping-bag"></i> Đơn hàng</a>
+                <a href="#" data-tab="products"><i class="fas fa-mobile"></i> Sản phẩm</a>
+                <a href="#" data-tab="categories"><i class="fas fa-list"></i> Danh mục</a>
+                <a href="#" data-tab="brands"><i class="fas fa-tags"></i> Thương hiệu</a>
+                <a href="#" data-tab="contacts"><i class="fas fa-envelope"></i> Liên hệ</a>
+                <a href="index.html"><i class="fas fa-globe"></i> Xem website</a>
+                <a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a>
+            </nav>
+        </aside>
+        <main class="admin-main">
+            <header class="admin-header">
+                <h1 id="pageTitle">Tổng quan</h1>
+                <div class="admin-user">
+                    <i class="fas fa-user-shield"></i>
+                    <span data-user-name></span>
+                </div>
+            </header>
+            <div id="adminContent" class="admin-content">
+                <div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Đang tải...</div>
+            </div>
+        </main>
+    </div>
+
+    <div class="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div class="toast-message"></div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/admin.js"></script>
+</body>
+</html>

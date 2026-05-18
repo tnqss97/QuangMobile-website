@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng nhập - Quang Mobile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/auth.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <div class="auth-page">
+        <div class="auth-bg"></div>
+        <div class="auth-container">
+            <a href="index.html" class="auth-logo">
+                <span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                Quang<span>Mobile</span>
+            </a>
+            
+            <div class="auth-card">
+                <div class="auth-header">
+                    <h1>Đăng nhập</h1>
+                    <p>Chào mừng trở lại! Đăng nhập để tiếp tục mua sắm</p>
+                </div>
+                
+                <form id="loginForm" class="auth-form">
+                    <div class="form-group">
+                        <label for="email"><i class="fas fa-envelope"></i> Email</label>
+                        <input type="email" id="email" name="email" required placeholder="email@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label for="password"><i class="fas fa-lock"></i> Mật khẩu</label>
+                        <div class="password-wrapper">
+                            <input type="password" id="password" name="password" required placeholder="Nhập mật khẩu" minlength="6">
+                            <button type="button" class="toggle-password"><i class="far fa-eye"></i></button>
+                        </div>
+                    </div>
+                    <div class="form-options">
+                        <label class="checkbox-label">
+                            <input type="checkbox" name="remember"> Ghi nhớ đăng nhập
+                        </label>
+                        <a href="#" class="forgot-link">Quên mật khẩu?</a>
+                    </div>
+                    <button type="submit" class="btn btn-primary btn-full">
+                        <i class="fas fa-sign-in-alt"></i> Đăng nhập
+                    </button>
+                </form>
+                
+                <div class="auth-divider"><span>hoặc</span></div>
+                
+                <div class="auth-demo">
+                    <p>Tài khoản demo:</p>
+                    <button class="btn btn-outline-dark btn-full" onclick="fillDemo('user')">
+                        <i class="fas fa-user"></i> Khách hàng (user@example.com)
+                    </button>
+                    <button class="btn btn-outline-dark btn-full" onclick="fillDemo('admin')">
+                        <i class="fas fa-user-shield"></i> Quản trị (admin@quangmobile.vn)
+                    </button>
+                </div>
+                
+                <div class="auth-footer">
+                    Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a>
+                </div>
+            </div>
+            
+            <a href="index.html" class="back-home"><i class="fas fa-arrow-left"></i> Về trang chủ</a>
+        </div>
+    </div>
+    
+    <div class="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div class="toast-message">Thành công!</div>
+    </div>
+    
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        document.querySelector('.toggle-password').addEventListener('click', function() {
+            const input = this.previousElementSibling;
+            const icon = this.querySelector('i');
+            if (input.type === 'password') {
+                input.type = 'text';
+                icon.classList.replace('fa-eye', 'fa-eye-slash');
+            } else {
+                input.type = 'password';
+                icon.classList.replace('fa-eye-slash', 'fa-eye');
+            }
+        });
+        
+        function fillDemo(type) {
+            if (type === 'admin') {
+                document.getElementById('email').value = 'admin@quangmobile.vn';
+                document.getElementById('password').value = 'Admin@123';
+            } else {
+                document.getElementById('email').value = 'user@example.com';
+                document.getElementById('password').value = 'User@123';
+            }
+        }
+        
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const btn = e.target.querySelector('button[type="submit"]');
+            const originalHTML = btn.innerHTML;
+            btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang xử lý...';
+            btn.disabled = true;
+            
+            try {
+                const res = await API.login({ email, password });
+                Auth.setToken(res.token);
+                Auth.setUser(res.user);
+                showToast('Đăng nhập thành công!');
+                setTimeout(() => {
+                    if (res.user.role === 'admin') {
+                        window.location.href = 'admin.html';
+                    } else {
+                        const redirect = new URLSearchParams(window.location.search).get('redirect');
+                        window.location.href = redirect || 'index.html';
+                    }
+                }, 800);
+            } catch (err) {
+                showToast(err.message || 'Đăng nhập thất bại', 'error');
+                btn.innerHTML = originalHTML;
+                btn.disabled = false;
+            }
+        });
+        
+        // Redirect if already logged in
+        if (Auth.isLoggedIn()) {
+            window.location.href = 'index.html';
+        }
+    </script>
+</body>
+</html>

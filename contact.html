@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Liên hệ - Quang Mobile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <span><i class="fas fa-phone"></i> Hotline: 0123 456 789</span>
+                <span><i class="fas fa-truck"></i> Miễn phí giao hàng toàn quốc cho đơn từ 500k</span>
+                <span><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1, TP.HCM</span>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                    Quang<span>Mobile</span>
+                </a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm sản phẩm bạn muốn...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="products.html">Sản phẩm</a></li>
+                    <li><a href="news.html">Tin tức</a></li>
+                    <li><a href="contact.html" class="active">Liên hệ</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="account.html" class="cart-icon" data-auth="logged-in" title="Tài khoản"><i class="fas fa-user"></i></a>
+                    <a href="login.html" class="btn btn-primary" data-auth="logged-out" style="padding:10px 20px;font-size:0.9rem">Đăng nhập</a>
+                    <a href="cart.html" class="cart-icon"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
+                </div>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Liên hệ với chúng tôi</h1>
+            <nav class="breadcrumb">
+                <a href="index.html">Trang chủ</a> / <span>Liên hệ</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-page">
+        <div class="container">
+            <div class="contact-grid">
+                <!-- Contact Info -->
+                <div class="contact-info-section animate-on-scroll">
+                    <h2>Thông tin liên hệ</h2>
+                    <p>Hãy liên hệ với chúng tôi nếu bạn cần tư vấn hoặc hỗ trợ. Đội ngũ Quang Mobile luôn sẵn sàng phục vụ bạn 24/7 với chất lượng dịch vụ tốt nhất.</p>
+                    
+                    <div class="contact-cards">
+                        <div class="contact-card">
+                            <div class="contact-card-icon"><i class="fas fa-map-marker-alt"></i></div>
+                            <h3>Địa chỉ</h3>
+                            <p>123 Đường ABC, Phường XYZ<br>Quận 1, TP. Hồ Chí Minh</p>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-card-icon"><i class="fas fa-phone-alt"></i></div>
+                            <h3>Điện thoại</h3>
+                            <p>Hotline: 0123 456 789<br>Bảo hành: 0123 456 780</p>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-card-icon"><i class="fas fa-envelope"></i></div>
+                            <h3>Email</h3>
+                            <p>info@quangmobile.vn<br>support@quangmobile.vn</p>
+                        </div>
+                        <div class="contact-card">
+                            <div class="contact-card-icon"><i class="fas fa-clock"></i></div>
+                            <h3>Giờ làm việc</h3>
+                            <p>Thứ 2 - Chủ nhật<br>8:00 - 21:00</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contact Form -->
+                <div class="contact-form-section animate-on-scroll">
+                    <h2>Gửi tin nhắn cho chúng tôi</h2>
+                    <form class="contact-form" id="contactForm">
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="name">Họ và tên <span class="required">*</span></label>
+                                <input type="text" id="name" name="name" required placeholder="Nhập họ và tên">
+                            </div>
+                            <div class="form-group">
+                                <label for="phone">Số điện thoại <span class="required">*</span></label>
+                                <input type="tel" id="phone" name="phone" required placeholder="0123 456 789">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">Email</label>
+                            <input type="email" id="email" name="email" placeholder="email@example.com">
+                        </div>
+                        <div class="form-group">
+                            <label for="subject">Chủ đề</label>
+                            <select id="subject" name="subject">
+                                <option value="">-- Chọn chủ đề --</option>
+                                <option value="tuvan">Tư vấn sản phẩm</option>
+                                <option value="baohanh">Bảo hành</option>
+                                <option value="khieunai">Khiếu nại</option>
+                                <option value="hoptac">Hợp tác kinh doanh</option>
+                                <option value="khac">Khác</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Nội dung <span class="required">*</span></label>
+                            <textarea id="message" name="message" rows="5" required placeholder="Nhập nội dung tin nhắn..."></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary btn-submit">
+                            <i class="fas fa-paper-plane"></i> Gửi tin nhắn
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Map -->
+            <div class="map-section">
+                <h2>Tìm chúng tôi trên bản đồ</h2>
+                <div class="map-container">
+                    <iframe 
+                        src="https://www.openstreetmap.org/export/embed.html?bbox=106.690%2C10.770%2C106.710%2C10.785&layer=mapnik&marker=10.7775%2C106.7"
+                        width="100%" 
+                        height="400" 
+                        style="border:0;" 
+                        allowfullscreen="" 
+                        loading="lazy"
+                        title="Bản đồ Quang Mobile">
+                    </iframe>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">FAQ</span>
+                <h2 class="section-title">Câu hỏi thường gặp</h2>
+                <p class="section-subtitle">Những thắc mắc phổ biến từ khách hàng và câu trả lời chi tiết</p>
+            </div>
+            <div class="faq-list">
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Sản phẩm tại Quang Mobile có chính hãng không?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Tất cả sản phẩm tại Quang Mobile đều là hàng chính hãng 100%, được nhập khẩu trực tiếp từ các nhà phân phối uy tín. Chúng tôi cam kết hoàn tiền gấp đôi nếu phát hiện hàng giả, hàng nhái.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Chính sách bảo hành như thế nào?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Tất cả sản phẩm đều được bảo hành chính hãng từ 12 đến 24 tháng tùy loại. Trong thời gian bảo hành, các lỗi từ nhà sản xuất sẽ được sửa chữa hoặc thay mới hoàn toàn miễn phí.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Có hỗ trợ trả góp 0% không?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Có. Chúng tôi hỗ trợ trả góp 0% lãi suất qua thẻ tín dụng của các ngân hàng hoặc qua các đối tác tài chính. Thời hạn trả góp từ 6 đến 24 tháng tùy theo gói vay bạn lựa chọn.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Thời gian giao hàng là bao lâu?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Nội thành TP.HCM: giao trong vòng 2-4 giờ. Các tỉnh thành khác: 1-3 ngày làm việc. Đơn hàng từ 500.000đ được miễn phí vận chuyển toàn quốc.
+                        </div>
+                    </div>
+                </div>
+                <div class="faq-item">
+                    <div class="faq-question">
+                        <span>Có thể đổi trả sản phẩm không?</span>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="faq-answer">
+                        <div class="faq-answer-inner">
+                            Quang Mobile hỗ trợ đổi trả miễn phí trong vòng 30 ngày kể từ ngày mua. Sản phẩm phải còn nguyên vẹn, đầy đủ phụ kiện và hộp đựng. Chúng tôi cam kết hoàn tiền 100% nếu không hài lòng.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>
+                        <span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                        Quang<span>Mobile</span>
+                    </h3>
+                    <p>Cửa hàng điện thoại và phụ kiện uy tín hàng đầu. Cam kết hàng chính hãng, giá tốt nhất.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Thông tin</h4>
+                    <ul>
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Danh mục</h4>
+                    <ul>
+                        <li><a href="#">Điện thoại</a></li>
+                        <li><a href="#">Ốp lưng</a></li>
+                        <li><a href="#">Tai nghe</a></li>
+                        <li><a href="#">Sạc & Cáp</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên hệ</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1, TP.HCM</li>
+                        <li><i class="fas fa-phone"></i> 0123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@quangmobile.vn</li>
+                        <li><i class="fas fa-clock"></i> 8:00 - 21:00 (T2 - CN)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Quang Mobile. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top"><i class="fas fa-arrow-up"></i></button>
+    <div class="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div class="toast-message">Gửi tin nhắn thành công!</div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

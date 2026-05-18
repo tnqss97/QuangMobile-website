@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quang Mobile - Điện thoại & Phụ kiện chính hãng</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <span><i class="fas fa-phone"></i> Hotline: 0123 456 789</span>
+                <span><i class="fas fa-truck"></i> Miễn phí giao hàng toàn quốc cho đơn từ 500k</span>
+                <span><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1, TP.HCM</span>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                    Quang<span>Mobile</span>
+                </a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm sản phẩm bạn muốn...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html" class="active">Trang chủ</a></li>
+                    <li><a href="products.html">Sản phẩm</a></li>
+                    <li><a href="news.html">Tin tức</a></li>
+                    <li><a href="contact.html">Liên hệ</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="account.html" class="cart-icon" data-auth="logged-in" title="Tài khoản"><i class="fas fa-user"></i></a>
+                    <a href="login.html" class="btn btn-primary" data-auth="logged-out" style="padding:10px 20px;font-size:0.9rem">Đăng nhập</a>
+                    <a href="cart.html" class="cart-icon"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
+                </div>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Side dot navigation (desktop only) -->
+    <nav class="fullpage-nav">
+        <a class="fullpage-dot active" data-section="0" data-label="Trang chủ"></a>
+        <a class="fullpage-dot" data-section="1" data-label="Danh mục"></a>
+        <a class="fullpage-dot" data-section="2" data-label="Sản phẩm nổi bật"></a>
+        <a class="fullpage-dot" data-section="3" data-label="Ưu điểm"></a>
+        <a class="fullpage-dot" data-section="4" data-label="Khuyến mãi"></a>
+        <a class="fullpage-dot" data-section="5" data-label="Tin tức"></a>
+        <a class="fullpage-dot" data-section="6" data-label="Đánh giá"></a>
+        <a class="fullpage-dot" data-section="7" data-label="Đăng ký tin"></a>
+        <a class="fullpage-dot" data-section="8" data-label="Liên hệ"></a>
+    </nav>
+
+    <!-- Scroll progress bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Section transition overlay -->
+    <div class="section-transition-overlay"></div>
+
+    <!-- Section indicator -->
+    <div class="section-indicator">
+        <span class="current">01</span>
+        <span class="divider"></span>
+        <span class="total">/ 09</span>
+    </div>
+
+    <div class="fullpage-wrapper">
+    <!-- Hero Section -->
+    <section class="fullpage-section hero">
+        <div class="hero-shape hero-shape-1"></div>
+        <div class="hero-shape hero-shape-2"></div>
+        <div class="hero-shape hero-shape-3"></div>
+        <div class="container">
+            <div class="hero-content">
+                <span class="hero-badge"><i class="fas fa-bolt"></i> Khuyến mãi đặc biệt tháng 5</span>
+                <h1>Điện thoại chính hãng<br><span class="highlight">Giá tốt nhất</span> thị trường</h1>
+                <p>Khám phá bộ sưu tập điện thoại và phụ kiện công nghệ mới nhất. Bảo hành chính hãng, đổi trả linh hoạt, giao hàng nhanh chóng.</p>
+                <div class="hero-buttons">
+                    <a href="products.html" class="btn btn-accent"><i class="fas fa-shopping-cart"></i> Mua ngay</a>
+                    <a href="news.html" class="btn btn-outline"><i class="fas fa-newspaper"></i> Xem tin tức</a>
+                </div>
+                <div class="hero-stats">
+                    <div class="stat-item">
+                        <span class="stat-number">10K+</span>
+                        <span class="stat-label">Khách hàng</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">500+</span>
+                        <span class="stat-label">Sản phẩm</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number">5★</span>
+                        <span class="stat-label">Đánh giá</span>
+                    </div>
+                </div>
+            </div>
+            <div class="hero-image">
+                <img src="images/hero-phone.svg" alt="Quang Mobile Hero">
+            </div>
+        </div>
+        <div class="scroll-hint">
+            <span>Lăn chuột để khám phá</span>
+            <div class="mouse-icon"></div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="fullpage-section categories">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Danh mục</span>
+                <h2 class="section-title">Mua sắm theo danh mục</h2>
+                <p class="section-subtitle">Đa dạng các sản phẩm điện thoại và phụ kiện chính hãng từ những thương hiệu hàng đầu</p>
+            </div>
+            <div class="category-grid">
+                <a href="products.html#phones" class="category-item animate-on-scroll">
+                    <div class="category-icon"><i class="fas fa-mobile-alt"></i></div>
+                    <span>Điện thoại</span>
+                    <small>250+ sản phẩm</small>
+                </a>
+                <a href="products.html#cases" class="category-item animate-on-scroll">
+                    <div class="category-icon"><i class="fas fa-shield-alt"></i></div>
+                    <span>Ốp lưng</span>
+                    <small>180+ sản phẩm</small>
+                </a>
+                <a href="products.html#chargers" class="category-item animate-on-scroll">
+                    <div class="category-icon"><i class="fas fa-bolt"></i></div>
+                    <span>Sạc & Cáp</span>
+                    <small>120+ sản phẩm</small>
+                </a>
+                <a href="products.html#headphones" class="category-item animate-on-scroll">
+                    <div class="category-icon"><i class="fas fa-headphones"></i></div>
+                    <span>Tai nghe</span>
+                    <small>95+ sản phẩm</small>
+                </a>
+                <a href="products.html#screens" class="category-item animate-on-scroll">
+                    <div class="category-icon"><i class="fas fa-mobile-screen"></i></div>
+                    <span>Cường lực</span>
+                    <small>75+ sản phẩm</small>
+                </a>
+                <a href="products.html#powerbanks" class="category-item animate-on-scroll">
+                    <div class="category-icon"><i class="fas fa-battery-full"></i></div>
+                    <span>Pin dự phòng</span>
+                    <small>60+ sản phẩm</small>
+                </a>
+            </div>
+
+            <div class="brand-strip animate-on-scroll">
+                <h4>Thương hiệu nổi bật</h4>
+                <div class="brand-list">
+                    <span class="brand-item"><i class="fab fa-apple"></i> Apple</span>
+                    <span class="brand-item">Samsung</span>
+                    <span class="brand-item">Xiaomi</span>
+                    <span class="brand-item">OPPO</span>
+                    <span class="brand-item">Vivo</span>
+                    <span class="brand-item">Realme</span>
+                    <span class="brand-item">Sony</span>
+                    <span class="brand-item">Anker</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Products -->
+    <section class="fullpage-section featured-products">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Bán chạy</span>
+                <h2 class="section-title">Sản phẩm nổi bật</h2>
+                <p class="section-subtitle">Top sản phẩm được khách hàng yêu thích và lựa chọn nhiều nhất</p>
+            </div>
+            <div class="product-grid">
+                <div class="product-card animate-on-scroll">
+                    <div class="product-badge">Hot</div>
+                    <div class="product-image-wrapper">
+                        <div class="product-image">
+                            <img src="images/phone1.svg" alt="iPhone 15 Pro Max">
+                        </div>
+                        <div class="product-actions">
+                            <button class="product-action-btn" title="Yêu thích"><i class="far fa-heart"></i></button>
+                            <button class="product-action-btn" title="Xem nhanh"><i class="far fa-eye"></i></button>
+                            <button class="product-action-btn" title="So sánh"><i class="fas fa-exchange-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Điện thoại</span>
+                        <h3>iPhone 15 Pro Max 256GB</h3>
+                        <div class="product-price">
+                            <span class="current-price">29.990.000₫</span>
+                            <span class="old-price">34.990.000₫</span>
+                        </div>
+                        <div class="product-rating">
+                            <span class="stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            </span>
+                            <span>(128 đánh giá)</span>
+                        </div>
+                        <button class="btn-add-cart"><span><i class="fas fa-cart-plus"></i> Thêm vào giỏ</span></button>
+                    </div>
+                </div>
+                <div class="product-card animate-on-scroll">
+                    <div class="product-badge sale">-15%</div>
+                    <div class="product-image-wrapper">
+                        <div class="product-image">
+                            <img src="images/phone2.svg" alt="Samsung Galaxy S24 Ultra">
+                        </div>
+                        <div class="product-actions">
+                            <button class="product-action-btn"><i class="far fa-heart"></i></button>
+                            <button class="product-action-btn"><i class="far fa-eye"></i></button>
+                            <button class="product-action-btn"><i class="fas fa-exchange-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Điện thoại</span>
+                        <h3>Samsung Galaxy S24 Ultra</h3>
+                        <div class="product-price">
+                            <span class="current-price">27.990.000₫</span>
+                            <span class="old-price">32.990.000₫</span>
+                        </div>
+                        <div class="product-rating">
+                            <span class="stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                            </span>
+                            <span>(95 đánh giá)</span>
+                        </div>
+                        <button class="btn-add-cart"><span><i class="fas fa-cart-plus"></i> Thêm vào giỏ</span></button>
+                    </div>
+                </div>
+                <div class="product-card animate-on-scroll">
+                    <div class="product-badge new">Mới</div>
+                    <div class="product-image-wrapper">
+                        <div class="product-image">
+                            <img src="images/phone3.svg" alt="Xiaomi 14 Ultra">
+                        </div>
+                        <div class="product-actions">
+                            <button class="product-action-btn"><i class="far fa-heart"></i></button>
+                            <button class="product-action-btn"><i class="far fa-eye"></i></button>
+                            <button class="product-action-btn"><i class="fas fa-exchange-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Điện thoại</span>
+                        <h3>Xiaomi 14 Ultra 512GB</h3>
+                        <div class="product-price">
+                            <span class="current-price">19.990.000₫</span>
+                            <span class="old-price">22.990.000₫</span>
+                        </div>
+                        <div class="product-rating">
+                            <span class="stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="far fa-star"></i>
+                            </span>
+                            <span>(67 đánh giá)</span>
+                        </div>
+                        <button class="btn-add-cart"><span><i class="fas fa-cart-plus"></i> Thêm vào giỏ</span></button>
+                    </div>
+                </div>
+                <div class="product-card animate-on-scroll">
+                    <div class="product-image-wrapper">
+                        <div class="product-image">
+                            <img src="images/accessory1.svg" alt="AirPods Pro 2">
+                        </div>
+                        <div class="product-actions">
+                            <button class="product-action-btn"><i class="far fa-heart"></i></button>
+                            <button class="product-action-btn"><i class="far fa-eye"></i></button>
+                            <button class="product-action-btn"><i class="fas fa-exchange-alt"></i></button>
+                        </div>
+                    </div>
+                    <div class="product-info">
+                        <span class="product-category">Tai nghe</span>
+                        <h3>AirPods Pro 2 USB-C</h3>
+                        <div class="product-price">
+                            <span class="current-price">5.490.000₫</span>
+                            <span class="old-price">6.199.000₫</span>
+                        </div>
+                        <div class="product-rating">
+                            <span class="stars">
+                                <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star-half-alt"></i>
+                            </span>
+                            <span>(203 đánh giá)</span>
+                        </div>
+                        <button class="btn-add-cart"><span><i class="fas fa-cart-plus"></i> Thêm vào giỏ</span></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Promotions Banner -->
+    <section class="fullpage-section promo-banner">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Cam kết</span>
+                <h2 class="section-title">Tại sao chọn Quang Mobile?</h2>
+                <p class="section-subtitle">Chúng tôi cam kết mang đến trải nghiệm mua sắm tốt nhất với những đặc quyền độc quyền</p>
+            </div>
+            <div class="promo-grid">
+                <div class="promo-item animate-on-scroll">
+                    <div class="promo-icon"><i class="fas fa-truck-fast"></i></div>
+                    <h3>Giao hàng miễn phí</h3>
+                    <p>Miễn phí ship toàn quốc cho đơn hàng từ 500.000₫. Giao hàng nhanh trong 2 giờ tại nội thành.</p>
+                </div>
+                <div class="promo-item animate-on-scroll">
+                    <div class="promo-icon"><i class="fas fa-rotate-left"></i></div>
+                    <h3>Đổi trả 30 ngày</h3>
+                    <p>Hoàn tiền 100% nếu không hài lòng. Đổi trả miễn phí trong 30 ngày kể từ khi nhận hàng.</p>
+                </div>
+                <div class="promo-item animate-on-scroll">
+                    <div class="promo-icon"><i class="fas fa-shield-halved"></i></div>
+                    <h3>Bảo hành chính hãng</h3>
+                    <p>Bảo hành chính hãng từ 12 đến 24 tháng. Sửa chữa miễn phí mọi lỗi từ nhà sản xuất.</p>
+                </div>
+                <div class="promo-item animate-on-scroll">
+                    <div class="promo-icon"><i class="fas fa-headset"></i></div>
+                    <h3>Hỗ trợ 24/7</h3>
+                    <p>Đội ngũ tư vấn chuyên nghiệp luôn sẵn sàng hỗ trợ bạn mọi lúc qua hotline và chat trực tuyến.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Banner -->
+    <section class="fullpage-section cta-banner">
+        <div class="container">
+            <div class="cta-content animate-on-scroll">
+                <div class="cta-text">
+                    <span class="cta-tag"><i class="fas fa-fire"></i> Ưu đãi giới hạn</span>
+                    <h2>Sale cực sốc<br>Giảm giá lên đến <span class="cta-highlight">50%</span></h2>
+                    <p>Cơ hội duy nhất trong tháng 5! Mua ngay điện thoại và phụ kiện chính hãng với giá tốt nhất, kèm theo nhiều quà tặng giá trị.</p>
+                    
+                    <ul class="cta-features">
+                        <li><i class="fas fa-check-circle"></i> Tặng kèm ốp lưng và kính cường lực</li>
+                        <li><i class="fas fa-check-circle"></i> Trả góp 0% lãi suất qua thẻ tín dụng</li>
+                        <li><i class="fas fa-check-circle"></i> Miễn phí giao hàng toàn quốc</li>
+                        <li><i class="fas fa-check-circle"></i> Bảo hành chính hãng 24 tháng</li>
+                    </ul>
+
+                    <div class="cta-countdown">
+                        <span class="countdown-label"><i class="far fa-clock"></i> Kết thúc sau:</span>
+                        <div class="countdown-timer">
+                            <div class="countdown-box"><strong data-cd="days">12</strong><span>Ngày</span></div>
+                            <div class="countdown-box"><strong data-cd="hours">08</strong><span>Giờ</span></div>
+                            <div class="countdown-box"><strong data-cd="minutes">45</strong><span>Phút</span></div>
+                            <div class="countdown-box"><strong data-cd="seconds">30</strong><span>Giây</span></div>
+                        </div>
+                    </div>
+
+                    <div class="cta-buttons">
+                        <a href="products.html" class="btn btn-accent"><i class="fas fa-bolt"></i> Mua ngay</a>
+                        <a href="news.html" class="btn btn-outline"><i class="fas fa-info-circle"></i> Xem chi tiết</a>
+                    </div>
+                </div>
+                <div class="cta-image">
+                    <img src="images/cta-deal.svg" alt="Giảm giá 50%">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Latest News -->
+    <section class="fullpage-section latest-news">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Tin tức</span>
+                <h2 class="section-title">Tin công nghệ mới nhất</h2>
+                <p class="section-subtitle">Cập nhật các thông tin mới nhất về thế giới di động và công nghệ</p>
+            </div>
+            <div class="news-grid">
+                <article class="news-card animate-on-scroll">
+                    <div class="news-image">
+                        <img src="images/news1.svg" alt="iPhone 16 sắp ra mắt">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta-top">
+                            <span class="news-tag">Điện thoại</span>
+                            <span class="news-date"><i class="far fa-calendar"></i> 15/05/2026</span>
+                        </div>
+                        <h3><a href="#">iPhone 16 Pro Max - Những tính năng đáng mong đợi</a></h3>
+                        <p>Apple dự kiến ra mắt iPhone 16 với nhiều cải tiến vượt trội về camera và hiệu năng...</p>
+                        <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                <article class="news-card animate-on-scroll">
+                    <div class="news-image">
+                        <img src="images/news2.svg" alt="So sánh tai nghe">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta-top">
+                            <span class="news-tag">Phụ kiện</span>
+                            <span class="news-date"><i class="far fa-calendar"></i> 12/05/2026</span>
+                        </div>
+                        <h3><a href="#">Top 5 tai nghe true wireless đáng mua nhất 2026</a></h3>
+                        <p>Cùng Quang Mobile điểm qua những mẫu tai nghe không dây tốt nhất hiện nay...</p>
+                        <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+                <article class="news-card animate-on-scroll">
+                    <div class="news-image">
+                        <img src="images/news3.svg" alt="Mẹo bảo vệ điện thoại">
+                    </div>
+                    <div class="news-content">
+                        <div class="news-meta-top">
+                            <span class="news-tag">Mẹo hay</span>
+                            <span class="news-date"><i class="far fa-calendar"></i> 10/05/2026</span>
+                        </div>
+                        <h3><a href="#">10 mẹo bảo vệ điện thoại hiệu quả trong mùa mưa</a></h3>
+                        <p>Thời tiết mưa ẩm có thể gây hại cho điện thoại. Hãy tham khảo các mẹo sau...</p>
+                        <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                    </div>
+                </article>
+            </div>
+            <div class="text-center">
+                <a href="news.html" class="btn btn-primary"><i class="fas fa-newspaper"></i> Xem tất cả tin tức</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonials -->
+    <section class="fullpage-section testimonials">
+        <div class="container">
+            <div class="section-header animate-on-scroll">
+                <span class="section-tag">Đánh giá</span>
+                <h2 class="section-title">Khách hàng nói gì về chúng tôi</h2>
+                <p class="section-subtitle">Hơn 10.000 khách hàng đã tin tưởng và lựa chọn Quang Mobile</p>
+            </div>
+            <div class="testimonial-grid">
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Mua iPhone 15 Pro Max ở Quang Mobile, sản phẩm chính hãng, đóng gói cẩn thận. Nhân viên tư vấn nhiệt tình, giao hàng nhanh. Sẽ ủng hộ shop dài dài!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">NA</div>
+                        <div class="author-info">
+                            <h4>Nguyễn Văn An</h4>
+                            <span>Khách hàng thân thiết</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Phụ kiện đa dạng, giá tốt, chất lượng cao. Đặc biệt ấn tượng với chính sách bảo hành rõ ràng và chế độ đổi trả thuận tiện. Rất đáng tin cậy!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">TH</div>
+                        <div class="author-info">
+                            <h4>Trần Thị Hoa</h4>
+                            <span>Khách hàng VIP</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card animate-on-scroll">
+                    <div class="testimonial-rating">
+                        <i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i><i class="fas fa-star"></i>
+                    </div>
+                    <p class="testimonial-text">Đã mua nhiều lần ở Quang Mobile và lần nào cũng hài lòng. Sản phẩm thật, giá hợp lý, dịch vụ chuyên nghiệp. Nhất định sẽ giới thiệu cho bạn bè!</p>
+                    <div class="testimonial-author">
+                        <div class="author-avatar">LM</div>
+                        <div class="author-info">
+                            <h4>Lê Minh Quân</h4>
+                            <span>Khách hàng mới</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="fullpage-section newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Đăng ký nhận tin khuyến mãi</h2>
+                <p>Để không bỏ lỡ những ưu đãi hấp dẫn và sản phẩm mới nhất từ Quang Mobile</p>
+                <form class="newsletter-form" onsubmit="return handleNewsletter(event)">
+                    <input type="email" placeholder="Nhập email của bạn..." required>
+                    <button type="submit" class="btn btn-accent"><i class="fas fa-paper-plane"></i> Đăng ký</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="fullpage-section footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>
+                        <span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                        Quang<span>Mobile</span>
+                    </h3>
+                    <p>Cửa hàng điện thoại và phụ kiện uy tín hàng đầu. Cam kết hàng chính hãng, giá tốt nhất, dịch vụ chuyên nghiệp.</p>
+                    <div class="social-links">
+                        <a href="#" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                        <a href="#" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                        <a href="#" aria-label="TikTok"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Thông tin</h4>
+                    <ul>
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Danh mục</h4>
+                    <ul>
+                        <li><a href="products.html">Điện thoại</a></li>
+                        <li><a href="products.html">Ốp lưng</a></li>
+                        <li><a href="products.html">Tai nghe</a></li>
+                        <li><a href="products.html">Sạc & Cáp</a></li>
+                        <li><a href="products.html">Pin dự phòng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên hệ</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1, TP.HCM</li>
+                        <li><i class="fas fa-phone"></i> 0123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@quangmobile.vn</li>
+                        <li><i class="fas fa-clock"></i> 8:00 - 21:00 (T2 - CN)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Quang Mobile. Thiết kế bởi Quang Mobile Team. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+    </div><!-- /.fullpage-wrapper -->
+
+    <!-- Back to top -->
+    <button class="back-to-top" aria-label="Lên đầu trang"><i class="fas fa-arrow-up"></i></button>
+
+    <!-- Toast notification -->
+    <div class="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div class="toast-message">Đã thêm vào giỏ hàng!</div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/index-data.js"></script>
+    <script src="js/fullpage.js"></script>
+</body>
+</html>

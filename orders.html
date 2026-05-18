@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theo dõi đơn hàng - Quang Mobile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/shop.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                    Quang<span>Mobile</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="products.html">Sản phẩm</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="cart.html" class="cart-icon"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Theo dõi đơn hàng</h1>
+        </div>
+    </section>
+
+    <section class="orders-page">
+        <div class="container">
+            <div class="track-form-wrap">
+                <h2>Tra cứu đơn hàng</h2>
+                <form id="trackForm" class="track-form">
+                    <input type="text" id="orderCode" placeholder="Nhập mã đơn hàng (VD: QM26051234ABC)" required>
+                    <button type="submit" class="btn btn-primary"><i class="fas fa-search"></i> Tra cứu</button>
+                </form>
+            </div>
+            <div id="orderResult"></div>
+        </div>
+    </section>
+
+    <div class="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div class="toast-message"></div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script>
+        const statusMap = {
+            pending: { label: 'Chờ xử lý', class: 'pending', icon: 'clock' },
+            confirmed: { label: 'Đã xác nhận', class: 'confirmed', icon: 'check' },
+            shipping: { label: 'Đang giao', class: 'shipping', icon: 'truck' },
+            delivered: { label: 'Đã giao', class: 'delivered', icon: 'check-circle' },
+            cancelled: { label: 'Đã hủy', class: 'cancelled', icon: 'times-circle' }
+        };
+        
+        async function loadOrder(code) {
+            try {
+                const res = await API.getOrder(code);
+                const o = res.data;
+                const st = statusMap[o.status] || statusMap.pending;
+                
+                const steps = ['pending', 'confirmed', 'shipping', 'delivered'];
+                const currentStep = steps.indexOf(o.status);
+                
+                document.getElementById('orderResult').innerHTML = `
+                    <div class="order-detail-card">
+                        <div class="order-detail-header">
+                            <div>
+                                <h2>Đơn hàng #${o.order_code}</h2>
+                                <span class="order-date">Đặt lúc: ${formatDateTime(o.created_at)}</span>
+                            </div>
+                            <span class="order-status order-status-${st.class}">
+                                <i class="fas fa-${st.icon}"></i> ${st.label}
+                            </span>
+                        </div>
+                        
+                        ${o.status !== 'cancelled' ? `
+                        <div class="order-progress">
+                            ${steps.map((s, i) => {
+                                const sm = statusMap[s];
+                                const isCurrent = i === currentStep;
+                                const isPassed = i <= currentStep;
+                                return `
+                                    <div class="progress-step ${isPassed ? 'passed' : ''} ${isCurrent ? 'current' : ''}">
+                                        <div class="step-circle"><i class="fas fa-${sm.icon}"></i></div>
+                                        <span>${sm.label}</span>
+                                    </div>
+                                `;
+                            }).join('<div class="progress-line"></div>')}
+                        </div>` : ''}
+                        
+                        <div class="order-detail-grid">
+                            <div class="order-info-block">
+                                <h4><i class="fas fa-user"></i> Thông tin người nhận</h4>
+                                <p><strong>${o.customer_name}</strong></p>
+                                <p>${o.customer_phone}</p>
+                                ${o.customer_email ? `<p>${o.customer_email}</p>` : ''}
+                                <p>${o.shipping_address}</p>
+                                ${o.note ? `<p><em>Ghi chú: ${o.note}</em></p>` : ''}
+                            </div>
+                            <div class="order-info-block">
+                                <h4><i class="fas fa-credit-card"></i> Thanh toán</h4>
+                                <p>Phương thức: ${o.payment_method.toUpperCase()}</p>
+                                <p>Trạng thái: ${o.payment_status}</p>
+                            </div>
+                        </div>
+                        
+                        <h4>Chi tiết sản phẩm</h4>
+                        <div class="order-items-list">
+                            ${o.items.map(i => `
+                                <div class="order-item-row">
+                                    <img src="${i.product_image || 'images/phone1.svg'}" onerror="this.src='images/phone1.svg'">
+                                    <div>
+                                        <h5>${i.product_name}</h5>
+                                        <span>${formatCurrency(i.price)} × ${i.quantity}</span>
+                                    </div>
+                                    <strong>${formatCurrency(i.subtotal)}</strong>
+                                </div>
+                            `).join('')}
+                        </div>
+                        
+                        <div class="order-totals">
+                            <div class="summary-row"><span>Tạm tính:</span><strong>${formatCurrency(o.subtotal)}</strong></div>
+                            <div class="summary-row"><span>Phí vận chuyển:</span><strong>${formatCurrency(o.shipping_fee)}</strong></div>
+                            <div class="summary-row total"><span>Tổng cộng:</span><strong>${formatCurrency(o.total)}</strong></div>
+                        </div>
+                    </div>
+                `;
+            } catch (err) {
+                document.getElementById('orderResult').innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <h2>${err.message}</h2>
+                    </div>`;
+            }
+        }
+        
+        document.getElementById('trackForm').addEventListener('submit', (e) => {
+            e.preventDefault();
+            const code = document.getElementById('orderCode').value.trim();
+            if (code) loadOrder(code);
+        });
+        
+        const code = new URLSearchParams(window.location.search).get('code');
+        if (code) {
+            document.getElementById('orderCode').value = code;
+            loadOrder(code);
+        }
+    </script>
+</body>
+</html>

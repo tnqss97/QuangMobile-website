@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tin tức công nghệ - Quang Mobile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <span><i class="fas fa-phone"></i> Hotline: 0123 456 789</span>
+                <span><i class="fas fa-truck"></i> Miễn phí giao hàng toàn quốc cho đơn từ 500k</span>
+                <span><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1, TP.HCM</span>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                    Quang<span>Mobile</span>
+                </a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm sản phẩm bạn muốn...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="products.html">Sản phẩm</a></li>
+                    <li><a href="news.html" class="active">Tin tức</a></li>
+                    <li><a href="contact.html">Liên hệ</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="account.html" class="cart-icon" data-auth="logged-in" title="Tài khoản"><i class="fas fa-user"></i></a>
+                    <a href="login.html" class="btn btn-primary" data-auth="logged-out" style="padding:10px 20px;font-size:0.9rem">Đăng nhập</a>
+                    <a href="cart.html" class="cart-icon"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
+                </div>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Page Header -->
+    <section class="page-header">
+        <div class="container">
+            <h1>Tin tức công nghệ</h1>
+            <nav class="breadcrumb">
+                <a href="index.html">Trang chủ</a> / <span>Tin tức</span>
+            </nav>
+        </div>
+    </section>
+
+    <!-- News Section -->
+    <section class="news-page">
+        <div class="container">
+            <div class="news-layout">
+                <!-- Main Content -->
+                <div class="news-main">
+                    <article class="news-card-large animate-on-scroll">
+                        <div class="news-image">
+                            <img src="images/news1.svg" alt="iPhone 16 Pro Max">
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category">Điện thoại</span>
+                                <span><i class="far fa-calendar"></i> 15/05/2026</span>
+                                <span><i class="far fa-user"></i> Quang Mobile</span>
+                                <span><i class="far fa-eye"></i> 1.2k lượt xem</span>
+                            </div>
+                            <h2><a href="#">iPhone 16 Pro Max - Những tính năng đáng mong đợi nhất</a></h2>
+                            <p>Apple dự kiến ra mắt iPhone 16 Pro Max với nhiều cải tiến vượt trội. Từ chip A18 Pro mạnh mẽ, camera periscope zoom quang 10x, đến màn hình ProMotion 240Hz. Cùng Quang Mobile tìm hiểu chi tiết những gì đáng mong đợi từ flagship mới nhất của Apple.</p>
+                            <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <article class="news-card-large animate-on-scroll">
+                        <div class="news-image">
+                            <img src="images/news2.svg" alt="Top tai nghe 2026">
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category">Phụ kiện</span>
+                                <span><i class="far fa-calendar"></i> 12/05/2026</span>
+                                <span><i class="far fa-user"></i> Quang Mobile</span>
+                                <span><i class="far fa-eye"></i> 856 lượt xem</span>
+                            </div>
+                            <h2><a href="#">Top 5 tai nghe true wireless đáng mua nhất 2026</a></h2>
+                            <p>Thị trường tai nghe không dây ngày càng phong phú với nhiều lựa chọn từ bình dân đến cao cấp. Quang Mobile đã thử nghiệm và đánh giá hàng chục mẫu tai nghe để chọn ra top 5 sản phẩm đáng mua nhất cho bạn.</p>
+                            <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <article class="news-card-large animate-on-scroll">
+                        <div class="news-image">
+                            <img src="images/news3.svg" alt="Bảo vệ điện thoại mùa mưa">
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category">Mẹo hay</span>
+                                <span><i class="far fa-calendar"></i> 10/05/2026</span>
+                                <span><i class="far fa-user"></i> Quang Mobile</span>
+                                <span><i class="far fa-eye"></i> 2.1k lượt xem</span>
+                            </div>
+                            <h2><a href="#">10 mẹo bảo vệ điện thoại hiệu quả trong mùa mưa</a></h2>
+                            <p>Mùa mưa đến, điện thoại của bạn đối mặt với nhiều nguy cơ từ nước và độ ẩm. Hãy tham khảo 10 mẹo đơn giản nhưng hiệu quả để bảo vệ thiết bị yêu quý của bạn trong thời tiết xấu.</p>
+                            <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <article class="news-card-large animate-on-scroll">
+                        <div class="news-image">
+                            <img src="images/news4.svg" alt="So sánh sạc nhanh">
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category">So sánh</span>
+                                <span><i class="far fa-calendar"></i> 08/05/2026</span>
+                                <span><i class="far fa-user"></i> Quang Mobile</span>
+                                <span><i class="far fa-eye"></i> 1.5k lượt xem</span>
+                            </div>
+                            <h2><a href="#">So sánh công nghệ sạc nhanh: USB PD vs QC 5.0 vs VOOC</a></h2>
+                            <p>Công nghệ sạc nhanh đang phát triển với tốc độ chóng mặt. Bài viết này sẽ giúp bạn hiểu rõ sự khác biệt giữa các chuẩn sạc phổ biến hiện nay và lựa chọn phù hợp nhất cho thiết bị của mình.</p>
+                            <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <article class="news-card-large animate-on-scroll">
+                        <div class="news-image">
+                            <img src="images/news5.svg" alt="Galaxy AI">
+                        </div>
+                        <div class="news-content">
+                            <div class="news-meta">
+                                <span class="news-category">AI & Mobile</span>
+                                <span><i class="far fa-calendar"></i> 05/05/2026</span>
+                                <span><i class="far fa-user"></i> Quang Mobile</span>
+                                <span><i class="far fa-eye"></i> 3.4k lượt xem</span>
+                            </div>
+                            <h2><a href="#">AI trên smartphone 2026: Từ Galaxy AI đến Apple Intelligence</a></h2>
+                            <p>Trí tuệ nhân tạo đang thay đổi cách chúng ta sử dụng điện thoại. Từ dịch thuật real-time, chỉnh sửa ảnh thông minh đến trợ lý ảo cá nhân hóa - AI đang mang đến trải nghiệm hoàn toàn mới.</p>
+                            <a href="#" class="read-more">Đọc thêm <i class="fas fa-arrow-right"></i></a>
+                        </div>
+                    </article>
+
+                    <!-- Pagination -->
+                    <div class="pagination">
+                        <a href="#" class="page-btn active">1</a>
+                        <a href="#" class="page-btn">2</a>
+                        <a href="#" class="page-btn">3</a>
+                        <a href="#" class="page-btn"><i class="fas fa-chevron-right"></i></a>
+                    </div>
+                </div>
+
+                <!-- Sidebar -->
+                <aside class="news-sidebar">
+                    <div class="sidebar-widget">
+                        <h3>Chuyên mục</h3>
+                        <ul class="category-list">
+                            <li><a href="#">Điện thoại <span>15</span></a></li>
+                            <li><a href="#">Phụ kiện <span>12</span></a></li>
+                            <li><a href="#">Mẹo hay <span>8</span></a></li>
+                            <li><a href="#">So sánh <span>10</span></a></li>
+                            <li><a href="#">AI & Mobile <span>6</span></a></li>
+                            <li><a href="#">Đánh giá <span>20</span></a></li>
+                        </ul>
+                    </div>
+                    <div class="sidebar-widget">
+                        <h3>Bài viết phổ biến</h3>
+                        <div class="popular-posts">
+                            <a href="#" class="popular-post">
+                                <div class="post-thumb"><img src="images/news1.svg" alt=""></div>
+                                <div>
+                                    <h4>iPhone 16 Pro Max - Tính năng mới</h4>
+                                    <span><i class="far fa-calendar"></i> 15/05/2026</span>
+                                </div>
+                            </a>
+                            <a href="#" class="popular-post">
+                                <div class="post-thumb"><img src="images/news2.svg" alt=""></div>
+                                <div>
+                                    <h4>Top 5 tai nghe TWS 2026</h4>
+                                    <span><i class="far fa-calendar"></i> 12/05/2026</span>
+                                </div>
+                            </a>
+                            <a href="#" class="popular-post">
+                                <div class="post-thumb"><img src="images/news5.svg" alt=""></div>
+                                <div>
+                                    <h4>AI trên smartphone 2026</h4>
+                                    <span><i class="far fa-calendar"></i> 05/05/2026</span>
+                                </div>
+                            </a>
+                            <a href="#" class="popular-post">
+                                <div class="post-thumb"><img src="images/news3.svg" alt=""></div>
+                                <div>
+                                    <h4>Mẹo bảo vệ điện thoại mùa mưa</h4>
+                                    <span><i class="far fa-calendar"></i> 10/05/2026</span>
+                                </div>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="sidebar-widget">
+                        <h3>Tags</h3>
+                        <div class="tag-cloud">
+                            <a href="#" class="tag">iPhone</a>
+                            <a href="#" class="tag">Samsung</a>
+                            <a href="#" class="tag">Xiaomi</a>
+                            <a href="#" class="tag">Tai nghe</a>
+                            <a href="#" class="tag">Sạc nhanh</a>
+                            <a href="#" class="tag">AI</a>
+                            <a href="#" class="tag">5G</a>
+                            <a href="#" class="tag">Camera</a>
+                            <a href="#" class="tag">Gaming</a>
+                            <a href="#" class="tag">Pin</a>
+                        </div>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter -->
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Đăng ký nhận tin khuyến mãi</h2>
+                <p>Để không bỏ lỡ những bài viết hay và ưu đãi hấp dẫn từ Quang Mobile</p>
+                <form class="newsletter-form" onsubmit="return handleNewsletter(event)">
+                    <input type="email" placeholder="Nhập email của bạn..." required>
+                    <button type="submit" class="btn btn-accent"><i class="fas fa-paper-plane"></i> Đăng ký</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3>
+                        <span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                        Quang<span>Mobile</span>
+                    </h3>
+                    <p>Cửa hàng điện thoại và phụ kiện uy tín hàng đầu. Cam kết hàng chính hãng, giá tốt nhất.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Thông tin</h4>
+                    <ul>
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                        <li><a href="#">Chính sách đổi trả</a></li>
+                        <li><a href="#">Chính sách vận chuyển</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Danh mục</h4>
+                    <ul>
+                        <li><a href="#">Điện thoại</a></li>
+                        <li><a href="#">Ốp lưng</a></li>
+                        <li><a href="#">Tai nghe</a></li>
+                        <li><a href="#">Sạc & Cáp</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên hệ</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1, TP.HCM</li>
+                        <li><i class="fas fa-phone"></i> 0123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@quangmobile.vn</li>
+                        <li><i class="fas fa-clock"></i> 8:00 - 21:00 (T2 - CN)</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2026 Quang Mobile. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <button class="back-to-top"><i class="fas fa-arrow-up"></i></button>
+    <div class="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div class="toast-message">Thành công!</div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

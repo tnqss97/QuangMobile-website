@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán - Quang Mobile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/shop.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                    Quang<span>Mobile</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="products.html">Sản phẩm</a></li>
+                    <li><a href="cart.html">Giỏ hàng</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="cart.html" class="cart-icon"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Thanh toán</h1>
+            <nav class="breadcrumb"><a href="index.html">Trang chủ</a> / <a href="cart.html">Giỏ hàng</a> / <span>Thanh toán</span></nav>
+        </div>
+    </section>
+
+    <section class="checkout-page">
+        <div class="container">
+            <div id="checkoutContent">
+                <div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Đang tải...</div>
+            </div>
+        </div>
+    </section>
+
+    <div class="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div class="toast-message"></div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/checkout.js"></script>
+</body>
+</html>

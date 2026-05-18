@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 250" width="400" height="250">
+  <defs>
+    <linearGradient id="n4Bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24"/>
+      <stop offset="100%" style="stop-color:#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="400" height="250" fill="url(#n4Bg)"/>
+  
+  <!-- Lightning bolts -->
+  <g opacity="0.3" fill="#fff">
+    <polygon points="30,30 50,30 40,60 60,60 30,100 35,75 20,75"/>
+    <polygon points="350,30 370,30 360,60 380,60 350,100 355,75 340,75"/>
+  </g>
+  
+  <!-- Charging phone -->
+  <g transform="translate(160, 50)">
+    <rect x="0" y="0" width="80" height="150" rx="12" fill="#1e293b"/>
+    <rect x="4" y="4" width="72" height="142" rx="10" fill="#0f172a"/>
+    <!-- Battery -->
+    <rect x="20" y="40" width="40" height="70" rx="5" fill="#fbbf24"/>
+    <rect x="20" y="40" width="40" height="50" rx="5" fill="rgba(255,255,255,0.3)"/>
+    <text x="40" y="80" text-anchor="middle" fill="#1e293b" font-family="Arial" font-size="18" font-weight="bold">⚡</text>
+    <text x="40" y="100" text-anchor="middle" fill="#1e293b" font-family="Arial" font-size="9" font-weight="bold">100%</text>
+    <!-- Charging port -->
+    <rect x="35" y="148" width="10" height="6" fill="#fbbf24"/>
+  </g>
+  
+  <text x="200" y="225" text-anchor="middle" fill="#fff" font-family="Arial" font-size="14" font-weight="bold">SẠC NHANH 2026</text>
+</svg>

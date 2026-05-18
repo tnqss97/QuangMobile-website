@@ -1,0 +1,29 @@
+# Render Blueprint - dùng để deploy nhanh trên Render.com
+# Tham khảo: https://render.com/docs/blueprint-spec
+
+services:
+  - type: web
+    name: quangmobile-backend
+    runtime: node
+    plan: free
+    region: singapore
+    rootDir: backend
+    buildCommand: npm install
+    startCommand: npm start
+    healthCheckPath: /api/health
+    envVars:
+      - key: NODE_ENV
+        value: production
+      - key: DB_SSL
+        value: "true"
+      - key: JWT_SECRET
+        generateValue: true
+      - key: JWT_EXPIRES
+        value: 7d
+      - key: ADMIN_EMAIL
+        value: admin@quangmobile.vn
+      - key: ADMIN_PASSWORD
+        value: Admin@123
+      # Set thủ công trong dashboard:
+      # - DATABASE_URL: connection string Neon
+      # - ALLOWED_ORIGINS: https://your-frontend.vercel.app

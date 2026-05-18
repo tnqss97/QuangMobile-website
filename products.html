@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản phẩm - Quang Mobile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <span><i class="fas fa-phone"></i> Hotline: 0123 456 789</span>
+                <span><i class="fas fa-truck"></i> Miễn phí giao hàng từ 500k</span>
+                <span><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1, TP.HCM</span>
+            </div>
+        </div>
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                    Quang<span>Mobile</span>
+                </a>
+                <div class="search-bar">
+                    <input type="text" placeholder="Tìm kiếm sản phẩm...">
+                    <button><i class="fas fa-search"></i></button>
+                </div>
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="products.html" class="active">Sản phẩm</a></li>
+                    <li><a href="news.html">Tin tức</a></li>
+                    <li><a href="contact.html">Liên hệ</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="account.html" class="cart-icon" data-auth="logged-in" title="Tài khoản"><i class="fas fa-user"></i></a>
+                    <a href="login.html" class="btn btn-primary" data-auth="logged-out" style="padding:10px 20px;font-size:0.9rem">Đăng nhập</a>
+                    <a href="cart.html" class="cart-icon"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
+                </div>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Sản phẩm</h1>
+            <nav class="breadcrumb"><a href="index.html">Trang chủ</a> / <span>Sản phẩm</span></nav>
+        </div>
+    </section>
+
+    <section class="products-page">
+        <div class="container">
+            <div class="products-layout">
+                <aside class="filter-sidebar">
+                    <div class="filter-group">
+                        <h3><i class="fas fa-list"></i> Danh mục</h3>
+                        <ul id="categoriesFilter">
+                            <li><a href="#" class="filter-active">Tất cả sản phẩm</a></li>
+                        </ul>
+                    </div>
+                    <div class="filter-group">
+                        <h3><i class="fas fa-tags"></i> Thương hiệu</h3>
+                        <ul id="brandsFilter"></ul>
+                    </div>
+                    <div class="filter-group">
+                        <h3><i class="fas fa-coins"></i> Khoảng giá</h3>
+                        <ul>
+                            <li><label><input type="radio" name="price" value="0-1000000"> Dưới 1 triệu</label></li>
+                            <li><label><input type="radio" name="price" value="1000000-5000000"> 1 - 5 triệu</label></li>
+                            <li><label><input type="radio" name="price" value="5000000-15000000"> 5 - 15 triệu</label></li>
+                            <li><label><input type="radio" name="price" value="15000000-30000000"> 15 - 30 triệu</label></li>
+                            <li><label><input type="radio" name="price" value="30000000-999999999"> Trên 30 triệu</label></li>
+                        </ul>
+                    </div>
+                </aside>
+
+                <div class="products-main">
+                    <div class="products-toolbar">
+                        <span class="results-count" id="resultsCount">Đang tải...</span>
+                        <select class="sort-select">
+                            <option value="newest">Sắp xếp: Mới nhất</option>
+                            <option value="price_asc">Giá: Thấp đến cao</option>
+                            <option value="price_desc">Giá: Cao đến thấp</option>
+                            <option value="bestseller">Bán chạy nhất</option>
+                        </select>
+                    </div>
+
+                    <div class="product-grid" id="productsGrid">
+                        <div style="grid-column:1/-1;text-align:center;padding:60px"><i class="fas fa-spinner fa-spin" style="font-size:2rem;color:#6366f1"></i></div>
+                    </div>
+
+                    <div class="pagination" id="pagination"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="newsletter">
+        <div class="container">
+            <div class="newsletter-content">
+                <h2>Đăng ký nhận tin khuyến mãi</h2>
+                <p>Để không bỏ lỡ những ưu đãi hấp dẫn từ Quang Mobile</p>
+                <form class="newsletter-form" onsubmit="return handleNewsletterSubmit(event)">
+                    <input type="email" placeholder="Nhập email của bạn..." required>
+                    <button type="submit" class="btn btn-accent"><i class="fas fa-paper-plane"></i> Đăng ký</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-grid">
+                <div class="footer-col">
+                    <h3><span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span> Quang<span>Mobile</span></h3>
+                    <p>Cửa hàng điện thoại và phụ kiện uy tín hàng đầu.</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-col">
+                    <h4>Hỗ trợ</h4>
+                    <ul>
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Chính sách bảo hành</a></li>
+                        <li><a href="orders.html">Tra cứu đơn hàng</a></li>
+                        <li><a href="contact.html">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Tài khoản</h4>
+                    <ul>
+                        <li><a href="login.html">Đăng nhập</a></li>
+                        <li><a href="register.html">Đăng ký</a></li>
+                        <li><a href="account.html">Tài khoản</a></li>
+                        <li><a href="cart.html">Giỏ hàng</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h4>Liên hệ</h4>
+                    <ul class="contact-info">
+                        <li><i class="fas fa-map-marker-alt"></i> 123 Đường ABC, Quận 1, TP.HCM</li>
+                        <li><i class="fas fa-phone"></i> 0123 456 789</li>
+                        <li><i class="fas fa-envelope"></i> info@quangmobile.vn</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom"><p>&copy; 2026 Quang Mobile. Tất cả quyền được bảo lưu.</p></div>
+        </div>
+    </footer>
+
+    <button class="back-to-top"><i class="fas fa-arrow-up"></i></button>
+    <div class="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div class="toast-message"></div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script src="js/products-page.js"></script>
+    <script>
+        function handleNewsletterSubmit(e) {
+            e.preventDefault();
+            const email = e.target.querySelector('input').value;
+            API.subscribeNewsletter(email)
+                .then(res => {
+                    showToast(res.message);
+                    e.target.reset();
+                })
+                .catch(err => showToast(err.message, 'error'));
+            return false;
+        }
+    </script>
+</body>
+</html>

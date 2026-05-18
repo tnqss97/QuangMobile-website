@@ -1,0 +1,35 @@
+{
+  "version": 2,
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "headers": [
+    {
+      "source": "/(.*)\\.(html|js|css|svg|png|jpg|jpeg|webp|ico)",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=3600" }
+      ]
+    },
+    {
+      "source": "/(.*)\\.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    }
+  ],
+  "rewrites": [
+    { "source": "/login", "destination": "/login.html" },
+    { "source": "/register", "destination": "/register.html" },
+    { "source": "/products", "destination": "/products.html" },
+    { "source": "/product", "destination": "/product.html" },
+    { "source": "/cart", "destination": "/cart.html" },
+    { "source": "/checkout", "destination": "/checkout.html" },
+    { "source": "/account", "destination": "/account.html" },
+    { "source": "/orders", "destination": "/orders.html" },
+    { "source": "/admin", "destination": "/admin.html" },
+    { "source": "/news", "destination": "/news.html" },
+    { "source": "/contact", "destination": "/contact.html" }
+  ],
+  "github": {
+    "silent": true
+  }
+}

@@ -1,0 +1,10 @@
+backend/
+node_modules/
+.env
+.env.*
+*.log
+.DS_Store
+README.md
+START.md
+DEPLOY.md
+.vscode/

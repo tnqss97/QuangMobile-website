@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tài khoản - Quang Mobile</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/shop.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon"><i class="fas fa-mobile-screen-button"></i></span>
+                    Quang<span>Mobile</span>
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">Trang chủ</a></li>
+                    <li><a href="products.html">Sản phẩm</a></li>
+                    <li><a href="news.html">Tin tức</a></li>
+                </ul>
+                <div class="nav-icons">
+                    <a href="cart.html" class="cart-icon"><i class="fas fa-shopping-bag"></i><span class="cart-count">0</span></a>
+                </div>
+                <button class="mobile-menu-btn"><i class="fas fa-bars"></i></button>
+            </div>
+        </nav>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Tài khoản của tôi</h1>
+        </div>
+    </section>
+
+    <section class="account-page">
+        <div class="container">
+            <div class="account-layout">
+                <aside class="account-sidebar">
+                    <div class="account-user">
+                        <div class="account-avatar"><i class="fas fa-user"></i></div>
+                        <div>
+                            <h4 data-user-name></h4>
+                            <span data-user-email></span>
+                        </div>
+                    </div>
+                    <ul class="account-menu">
+                        <li><a href="#" class="active" data-tab="profile"><i class="fas fa-user-edit"></i> Thông tin cá nhân</a></li>
+                        <li><a href="#" data-tab="orders"><i class="fas fa-box"></i> Đơn hàng</a></li>
+                        <li><a href="#" data-tab="wishlist"><i class="fas fa-heart"></i> Yêu thích</a></li>
+                        <li><a href="#" data-tab="password"><i class="fas fa-lock"></i> Đổi mật khẩu</a></li>
+                        <li><a href="admin.html" data-auth="admin"><i class="fas fa-cog"></i> Quản trị</a></li>
+                        <li><a href="#" onclick="logout()"><i class="fas fa-sign-out-alt"></i> Đăng xuất</a></li>
+                    </ul>
+                </aside>
+                <main class="account-content" id="accountContent">
+                    <div class="loading-state"><i class="fas fa-spinner fa-spin"></i> Đang tải...</div>
+                </main>
+            </div>
+        </div>
+    </section>
+
+    <div class="toast">
+        <div class="toast-icon"><i class="fas fa-check"></i></div>
+        <div class="toast-message"></div>
+    </div>
+
+    <script src="js/config.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/account.js"></script>
+</body>
+</html>

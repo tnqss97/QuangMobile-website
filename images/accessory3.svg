@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280" width="200" height="280">
+  <defs>
+    <linearGradient id="cableGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" style="stop-color:#fbbf24"/>
+      <stop offset="100%" style="stop-color:#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <!-- Cable curve -->
+  <path d="M 50 80 Q 30 130, 60 170 T 50 250" stroke="url(#cableGrad)" stroke-width="14" fill="none" stroke-linecap="round"/>
+  <path d="M 150 80 Q 170 120, 140 160 T 150 250" stroke="url(#cableGrad)" stroke-width="14" fill="none" stroke-linecap="round"/>
+  
+  <!-- USB-C connector left -->
+  <g transform="translate(50, 50)">
+    <rect x="-12" y="0" width="24" height="32" rx="4" fill="#1e293b"/>
+    <rect x="-8" y="5" width="16" height="22" rx="3" fill="#475569"/>
+    <rect x="-12" y="32" width="24" height="20" fill="url(#cableGrad)"/>
+  </g>
+  
+  <!-- USB-C connector right -->
+  <g transform="translate(150, 50)">
+    <rect x="-12" y="0" width="24" height="32" rx="4" fill="#1e293b"/>
+    <rect x="-8" y="5" width="16" height="22" rx="3" fill="#475569"/>
+    <rect x="-12" y="32" width="24" height="20" fill="url(#cableGrad)"/>
+  </g>
+  
+  <text x="100" y="200" text-anchor="middle" fill="#1e293b" font-family="Arial" font-size="13" font-weight="bold">Cáp USB-C</text>
+  <text x="100" y="220" text-anchor="middle" fill="#64748b" font-family="Arial" font-size="10">Sạc nhanh 100W</text>
+</svg>

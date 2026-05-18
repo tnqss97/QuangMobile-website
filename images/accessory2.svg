@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 280" width="200" height="280">
+  <defs>
+    <linearGradient id="pbBody" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#0f172a"/>
+    </linearGradient>
+  </defs>
+  <!-- Power bank body -->
+  <rect x="50" y="60" width="100" height="160" rx="15" fill="url(#pbBody)"/>
+  <rect x="55" y="65" width="90" height="150" rx="12" fill="#334155"/>
+  
+  <!-- Display -->
+  <rect x="65" y="85" width="70" height="40" rx="5" fill="#0f172a"/>
+  <text x="100" y="110" text-anchor="middle" fill="#10b981" font-family="monospace" font-size="14" font-weight="bold">100%</text>
+  
+  <!-- LED indicators -->
+  <circle cx="75" cy="145" r="4" fill="#10b981"/>
+  <circle cx="90" cy="145" r="4" fill="#10b981"/>
+  <circle cx="105" cy="145" r="4" fill="#10b981"/>
+  <circle cx="120" cy="145" r="4" fill="#10b981"/>
+  
+  <!-- USB ports -->
+  <rect x="75" y="170" width="20" height="10" rx="2" fill="#0f172a"/>
+  <rect x="105" y="170" width="20" height="10" rx="2" fill="#0f172a"/>
+  
+  <!-- Brand -->
+  <text x="100" y="205" text-anchor="middle" fill="#fff" font-family="Arial" font-size="10" font-weight="bold">Anker</text>
+  
+  <text x="100" y="245" text-anchor="middle" fill="#1e293b" font-family="Arial" font-size="11" font-weight="bold">Pin dự phòng 20000mAh</text>
+</svg>

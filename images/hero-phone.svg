@@ -1,0 +1,100 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="500" height="500">
+  <defs>
+    <linearGradient id="phoneGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#1e293b"/>
+      <stop offset="100%" style="stop-color:#0f172a"/>
+    </linearGradient>
+    <linearGradient id="screenGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#667eea"/>
+      <stop offset="50%" style="stop-color:#764ba2"/>
+      <stop offset="100%" style="stop-color:#f093fb"/>
+    </linearGradient>
+    <linearGradient id="phoneGrad2" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#fbbf24"/>
+      <stop offset="100%" style="stop-color:#f59e0b"/>
+    </linearGradient>
+    <filter id="glow">
+      <feGaussianBlur stdDeviation="8" result="coloredBlur"/>
+      <feMerge>
+        <feMergeNode in="coloredBlur"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+  
+  <!-- Background circles -->
+  <circle cx="250" cy="250" r="200" fill="rgba(255,255,255,0.05)"/>
+  <circle cx="250" cy="250" r="160" fill="rgba(255,255,255,0.05)"/>
+  
+  <!-- Phone 2 (back) -->
+  <g transform="translate(120, 80) rotate(-15 90 175)">
+    <rect x="0" y="0" width="180" height="350" rx="25" fill="url(#phoneGrad2)" opacity="0.9"/>
+    <rect x="10" y="35" width="160" height="280" rx="15" fill="#fff"/>
+    <circle cx="90" cy="20" r="3" fill="#1e293b"/>
+    <rect x="20" y="50" width="140" height="80" rx="10" fill="#fef3c7"/>
+    <rect x="20" y="140" width="60" height="60" rx="8" fill="#fbbf24"/>
+    <rect x="90" y="140" width="70" height="60" rx="8" fill="#f59e0b"/>
+    <rect x="20" y="210" width="140" height="20" rx="5" fill="#fde68a"/>
+    <rect x="20" y="240" width="100" height="20" rx="5" fill="#fde68a"/>
+    <rect x="20" y="270" width="120" height="20" rx="5" fill="#fde68a"/>
+  </g>
+  
+  <!-- Phone 1 (front) -->
+  <g transform="translate(180, 60) rotate(8 90 195)" filter="url(#glow)">
+    <!-- Phone body -->
+    <rect x="0" y="0" width="180" height="380" rx="30" fill="url(#phoneGrad)"/>
+    <!-- Screen -->
+    <rect x="8" y="8" width="164" height="364" rx="24" fill="url(#screenGrad)"/>
+    <!-- Notch -->
+    <rect x="65" y="8" width="50" height="20" rx="10" fill="#0f172a"/>
+    
+    <!-- Status bar -->
+    <text x="20" y="50" fill="#fff" font-family="Arial" font-size="10" font-weight="bold">9:41</text>
+    <circle cx="155" cy="46" r="3" fill="#fff"/>
+    
+    <!-- App icons grid -->
+    <g transform="translate(20, 70)">
+      <rect x="0" y="0" width="30" height="30" rx="8" fill="rgba(255,255,255,0.9)"/>
+      <rect x="40" y="0" width="30" height="30" rx="8" fill="rgba(255,255,255,0.9)"/>
+      <rect x="80" y="0" width="30" height="30" rx="8" fill="rgba(255,255,255,0.9)"/>
+      <rect x="120" y="0" width="30" height="30" rx="8" fill="rgba(255,255,255,0.9)"/>
+      
+      <rect x="0" y="40" width="30" height="30" rx="8" fill="rgba(255,255,255,0.9)"/>
+      <rect x="40" y="40" width="30" height="30" rx="8" fill="rgba(255,255,255,0.9)"/>
+      <rect x="80" y="40" width="30" height="30" rx="8" fill="rgba(255,255,255,0.9)"/>
+      <rect x="120" y="40" width="30" height="30" rx="8" fill="rgba(255,255,255,0.9)"/>
+      
+      <rect x="0" y="80" width="30" height="30" rx="8" fill="rgba(255,255,255,0.9)"/>
+      <rect x="40" y="80" width="30" height="30" rx="8" fill="rgba(255,255,255,0.9)"/>
+      <rect x="80" y="80" width="30" height="30" rx="8" fill="rgba(255,255,255,0.9)"/>
+      <rect x="120" y="80" width="30" height="30" rx="8" fill="rgba(255,255,255,0.9)"/>
+    </g>
+    
+    <!-- Big widget -->
+    <rect x="20" y="200" width="140" height="100" rx="15" fill="rgba(255,255,255,0.2)"/>
+    <text x="35" y="225" fill="#fff" font-family="Arial" font-size="10" font-weight="bold">Quang Mobile</text>
+    <text x="35" y="245" fill="#fff" font-family="Arial" font-size="20" font-weight="bold">29.99M</text>
+    <text x="35" y="280" fill="rgba(255,255,255,0.7)" font-family="Arial" font-size="9">iPhone 15 Pro Max</text>
+    
+    <!-- Dock -->
+    <rect x="20" y="320" width="140" height="40" rx="20" fill="rgba(255,255,255,0.2)"/>
+    <circle cx="40" cy="340" r="10" fill="#fff"/>
+    <circle cx="70" cy="340" r="10" fill="#fff"/>
+    <circle cx="100" cy="340" r="10" fill="#fff"/>
+    <circle cx="130" cy="340" r="10" fill="#fff"/>
+  </g>
+  
+  <!-- Floating elements -->
+  <g>
+    <circle cx="80" cy="120" r="20" fill="#fbbf24" opacity="0.8"/>
+    <text x="80" y="127" text-anchor="middle" fill="#fff" font-family="Arial" font-size="18" font-weight="bold">★</text>
+  </g>
+  <g>
+    <circle cx="430" cy="380" r="25" fill="#10b981" opacity="0.9"/>
+    <text x="430" y="388" text-anchor="middle" fill="#fff" font-family="Arial" font-size="20" font-weight="bold">✓</text>
+  </g>
+  <g>
+    <circle cx="420" cy="120" r="18" fill="#ef4444" opacity="0.9"/>
+    <text x="420" y="127" text-anchor="middle" fill="#fff" font-family="Arial" font-size="14" font-weight="bold">%</text>
+  </g>
+</svg>
