@@ -73,9 +73,31 @@ app.use(express.static(frontendPath, {
     }
 }));
 
+// Track request start time
+app.use((req, res, next) => { req._startTime = Date.now(); next(); });
+
 // ===== API ROUTES =====
 app.get('/api/health', (req, res) => {
     res.json({ success: true, message: 'API is running', timestamp: new Date().toISOString() });
+});
+
+app.get('/api/health/db', async (req, res) => {
+    try {
+        const result = await db.query('SELECT NOW() AS time, version() AS version');
+        res.json({
+            success: true,
+            message: 'Database is alive',
+            db_time: result.rows[0].time,
+            version: result.rows[0].version.split(' ').slice(0, 2).join(' '),
+            response_ms: Date.now() - req._startTime
+        });
+    } catch (err) {
+        res.status(503).json({
+            success: false,
+            message: 'Database error',
+            error: err.message
+        });
+    }
 });
 
 app.use('/api/auth', authLimiter, authRoutes);

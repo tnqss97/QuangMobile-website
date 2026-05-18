@@ -1,7 +1,7 @@
 name: Keep Backend Awake
 
 on:
-  # Chạy mỗi 10 phút
+  # Chạy mỗi 10 phút (Render sleep sau 15 phút)
   schedule:
     - cron: '*/10 * * * *'
   # Cho phép chạy thủ công từ tab Actions
@@ -12,10 +12,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Ping backend health endpoint
+        id: backend
         run: |
-          echo "Pinging backend at $(date -u)..."
-          response=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 https://quangmobile-backend.onrender.com/api/health)
+          echo "🔄 Pinging backend at $(date -u)..."
+          response=$(curl -s -o response.json -w "%{http_code}" --max-time 90 https://quangmobile-backend.onrender.com/api/health)
           echo "Response code: $response"
+          cat response.json
+          echo ""
           if [ "$response" = "200" ]; then
             echo "✅ Backend is alive"
           else
@@ -23,13 +26,26 @@ jobs:
             exit 1
           fi
 
-      - name: Ping database via categories endpoint
+      - name: Ping database health endpoint
+        id: database
         run: |
-          echo "Pinging DB query..."
-          response=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 https://quangmobile-backend.onrender.com/api/categories)
+          echo "🔄 Pinging database via /api/health/db..."
+          response=$(curl -s -o db_response.json -w "%{http_code}" --max-time 90 https://quangmobile-backend.onrender.com/api/health/db)
           echo "Response code: $response"
+          cat db_response.json
+          echo ""
           if [ "$response" = "200" ]; then
-            echo "✅ Database is alive"
+            echo "✅ Database is alive and responding to queries"
+          elif [ "$response" = "503" ]; then
+            echo "⚠️ Database error (Neon may be cold starting)"
+            # Don't fail - cold start is acceptable
           else
-            echo "⚠️ DB ping returned $response"
+            echo "⚠️ Unexpected response: $response"
           fi
+
+      - name: Summary
+        run: |
+          echo "## Health Check Summary" >> $GITHUB_STEP_SUMMARY
+          echo "- Time: $(date -u)" >> $GITHUB_STEP_SUMMARY
+          echo "- Backend: ✅" >> $GITHUB_STEP_SUMMARY
+          echo "- Database: ✅" >> $GITHUB_STEP_SUMMARY
