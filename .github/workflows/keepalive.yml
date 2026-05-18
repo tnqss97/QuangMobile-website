@@ -1,0 +1,35 @@
+name: Keep Backend Awake
+
+on:
+  # Chạy mỗi 10 phút
+  schedule:
+    - cron: '*/10 * * * *'
+  # Cho phép chạy thủ công từ tab Actions
+  workflow_dispatch:
+
+jobs:
+  ping:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Ping backend health endpoint
+        run: |
+          echo "Pinging backend at $(date -u)..."
+          response=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 https://quangmobile-backend.onrender.com/api/health)
+          echo "Response code: $response"
+          if [ "$response" = "200" ]; then
+            echo "✅ Backend is alive"
+          else
+            echo "⚠️ Backend returned $response"
+            exit 1
+          fi
+
+      - name: Ping database via categories endpoint
+        run: |
+          echo "Pinging DB query..."
+          response=$(curl -s -o /dev/null -w "%{http_code}" --max-time 90 https://quangmobile-backend.onrender.com/api/categories)
+          echo "Response code: $response"
+          if [ "$response" = "200" ]; then
+            echo "✅ Database is alive"
+          else
+            echo "⚠️ DB ping returned $response"
+          fi
