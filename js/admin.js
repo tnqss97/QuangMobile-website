@@ -1051,8 +1051,21 @@ function openNewsModal() {
                     <div class="form-section">
                         <h4>Hình ảnh & Hiển thị</h4>
                         <div class="form-group">
-                            <label>URL hình ảnh đại diện</label>
-                            <input type="text" name="image" placeholder="https://... hoặc images/news1.svg" value="images/news1.svg">
+                            <label>Hình ảnh đại diện</label>
+                            <div class="image-upload-area">
+                                <div class="image-preview" id="newsImagePreview">
+                                    <i class="fas fa-cloud-upload-alt"></i><span>Chọn ảnh từ máy tính</span>
+                                </div>
+                                <div class="image-upload-controls">
+                                    <input type="file" id="newsImageFile" accept="image/*" style="display:none">
+                                    <button type="button" class="btn btn-outline-primary btn-sm" id="btnChooseNewsImage">
+                                        <i class="fas fa-upload"></i> Chọn ảnh
+                                    </button>
+                                    <span class="upload-status" id="newsUploadStatus"></span>
+                                </div>
+                                <input type="hidden" name="image" id="newsImageUrl" value="images/news1.svg">
+                                <input type="text" id="newsImageUrlManual" placeholder="Hoặc nhập URL ảnh..." value="" style="margin-top:8px">
+                            </div>
                         </div>
                         <div class="form-row">
                             <div class="form-group">
@@ -1085,6 +1098,47 @@ function openNewsModal() {
     let mdOverlay = false;
     modal.addEventListener('mousedown', (e) => { mdOverlay = (e.target === modal); });
     modal.addEventListener('mouseup', (e) => { if (mdOverlay && e.target === modal) modal.remove(); mdOverlay = false; });
+    
+    // News image upload handler
+    const newsFileInput = modal.querySelector('#newsImageFile');
+    const newsPreview = modal.querySelector('#newsImagePreview');
+    const newsUrlInput = modal.querySelector('#newsImageUrl');
+    const newsUrlManual = modal.querySelector('#newsImageUrlManual');
+    const newsUploadStatus = modal.querySelector('#newsUploadStatus');
+    const btnChooseNewsImg = modal.querySelector('#btnChooseNewsImage');
+    
+    btnChooseNewsImg.addEventListener('click', () => newsFileInput.click());
+    newsPreview.addEventListener('click', () => newsFileInput.click());
+    
+    newsFileInput.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        if (!file.type.startsWith('image/')) { showToast('Vui lòng chọn file ảnh', 'error'); return; }
+        if (file.size > 5 * 1024 * 1024) { showToast('Ảnh quá lớn (tối đa 5MB)', 'error'); return; }
+        
+        const reader = new FileReader();
+        reader.onload = async (ev) => {
+            const base64 = ev.target.result;
+            newsPreview.innerHTML = `<img src="${base64}" alt="Preview">`;
+            newsUploadStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang upload...';
+            try {
+                const res = await API.uploadImage(base64);
+                newsUrlInput.value = res.data.url;
+                newsUrlManual.value = res.data.url;
+                newsUploadStatus.innerHTML = '<i class="fas fa-check-circle" style="color:var(--success)"></i> Upload thành công';
+            } catch (err) {
+                newsUploadStatus.innerHTML = `<i class="fas fa-exclamation-circle" style="color:var(--danger)"></i> ${err.message}`;
+            }
+        };
+        reader.readAsDataURL(file);
+    });
+    
+    newsUrlManual.addEventListener('input', (e) => {
+        newsUrlInput.value = e.target.value;
+        if (e.target.value) {
+            newsPreview.innerHTML = `<img src="${e.target.value}" alt="Preview" onerror="this.parentElement.innerHTML='<i class=\\'fas fa-image\\'></i><span>Ảnh không hợp lệ</span>'">`;
+        }
+    });
     
     modal.querySelector('#newsForm').addEventListener('submit', async (e) => {
         e.preventDefault();
