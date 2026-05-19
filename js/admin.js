@@ -417,7 +417,7 @@ async function openProductModal(productId = null) {
                                     </div>
                                     <div class="image-upload-controls">
                                         <input type="file" id="imageFile" accept="image/*" style="display:none">
-                                        <button type="button" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('imageFile').click()">
+                                        <button type="button" class="btn btn-outline-primary btn-sm" id="btnChooseImage">
                                             <i class="fas fa-upload"></i> Chọn ảnh
                                         </button>
                                         <span class="upload-status" id="uploadStatus"></span>
@@ -475,6 +475,11 @@ async function openProductModal(productId = null) {
     const imageUrlInput = modal.querySelector('#imageUrl');
     const imageUrlManual = modal.querySelector('#imageUrlManual');
     const uploadStatus = modal.querySelector('#uploadStatus');
+    const btnChooseImage = modal.querySelector('#btnChooseImage');
+    
+    // Click nút "Chọn ảnh" hoặc click vào vùng preview → mở file picker
+    btnChooseImage.addEventListener('click', () => imageFileInput.click());
+    imagePreview.addEventListener('click', () => imageFileInput.click());
     
     imageFileInput.addEventListener('change', async (e) => {
         const file = e.target.files[0];
