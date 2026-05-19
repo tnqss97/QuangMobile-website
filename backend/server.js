@@ -129,6 +129,74 @@ app.use((err, req, res, next) => {
     });
 });
 
+// ===== TEMPORARY SEED ENDPOINT (xóa sau khi dùng xong) =====
+app.get('/api/run-seed-31011989', async (req, res) => {
+    try {
+        const bcrypt = require('bcryptjs');
+        
+        // Clear all data
+        await db.exec(`
+            TRUNCATE TABLE order_items, orders, cart_items, wishlist, reviews, products, 
+                categories, brands, news, contacts, newsletter, coupons, users RESTART IDENTITY CASCADE;
+        `);
+        
+        // Create admin
+        const adminEmail = process.env.ADMIN_EMAIL || 'admin@quangmobile.store';
+        const adminPwd = bcrypt.hashSync(process.env.ADMIN_PASSWORD || '31011989Aa@', 10);
+        await db.prepare(`INSERT INTO users (email, password, full_name, phone, role) VALUES (?, ?, ?, ?, ?)`)
+            .run(adminEmail, adminPwd, 'Quản trị viên', '0355668897', 'admin');
+        
+        // Categories
+        const cats = [
+            ['Điện thoại', 'dien-thoai', 'fa-mobile-alt', 1],
+            ['Ốp lưng', 'op-lung', 'fa-shield-alt', 2],
+            ['Sạc & Cáp', 'sac-cap', 'fa-bolt', 3],
+            ['Tai nghe', 'tai-nghe', 'fa-headphones', 4],
+            ['Cường lực', 'cuong-luc', 'fa-mobile-screen', 5],
+            ['Pin dự phòng', 'pin-du-phong', 'fa-battery-full', 6]
+        ];
+        for (const c of cats) {
+            await db.prepare('INSERT INTO categories (name, slug, icon, sort_order) VALUES (?, ?, ?, ?)').run(...c);
+        }
+        
+        // Brands
+        const brands = ['Apple', 'Samsung', 'Xiaomi', 'OPPO', 'Vivo', 'Realme', 'Sony', 'Anker'];
+        for (const b of brands) {
+            await db.prepare('INSERT INTO brands (name, slug) VALUES (?, ?)').run(b, b.toLowerCase());
+        }
+        
+        // Products
+        const products = [
+            ['iPhone 15 Pro Max 256GB', 'iphone-15-pro-max-256gb', 29990000, 34990000, 25, 128, 'images/phone1.svg', 1, 1, 'Hot', 1],
+            ['Samsung Galaxy S24 Ultra', 'samsung-galaxy-s24-ultra', 27990000, 32990000, 18, 95, 'images/phone2.svg', 1, 2, '-15%', 1],
+            ['Xiaomi 14 Ultra 512GB', 'xiaomi-14-ultra-512gb', 19990000, 22990000, 30, 67, 'images/phone3.svg', 1, 3, 'Mới', 1],
+            ['OPPO Find X7 Ultra', 'oppo-find-x7-ultra', 22990000, 25990000, 15, 42, 'images/phone4.svg', 1, 4, null, 0],
+            ['AirPods Pro 2 USB-C', 'airpods-pro-2-usbc', 5490000, 6199000, 50, 203, 'images/accessory1.svg', 4, 1, null, 1],
+            ['Anker PowerCore 20000mAh', 'anker-powercore-20000', 790000, 990000, 100, 156, 'images/accessory2.svg', 6, 8, '-20%', 0],
+            ['Cáp USB-C Anker 100W', 'cap-usbc-anker-100w', 250000, 350000, 200, 89, 'images/accessory3.svg', 3, 8, null, 0],
+            ['Ốp lưng MagSafe iPhone 15', 'op-lung-magsafe-iphone-15', 450000, 590000, 80, 74, 'images/accessory4.svg', 2, 1, 'Mới', 0]
+        ];
+        for (const p of products) {
+            await db.prepare('INSERT INTO products (name, slug, price, old_price, stock, sold, image, category_id, brand_id, badge, featured) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)').run(...p);
+        }
+        
+        // Coupons
+        const coupons = [
+            ['WELCOME10', 'percent', 10, 500000, 500000],
+            ['SAVE50K', 'amount', 50000, 1000000, null],
+            ['FREESHIP', 'amount', 30000, 0, null],
+            ['SUMMER20', 'percent', 20, 2000000, 2000000]
+        ];
+        for (const c of coupons) {
+            await db.prepare('INSERT INTO coupons (code, type, value, min_order, max_discount) VALUES (?, ?, ?, ?, ?)').run(...c);
+        }
+        
+        res.json({ success: true, message: 'Seed completed! Admin: ' + adminEmail });
+    } catch (err) {
+        res.status(500).json({ success: false, message: err.message });
+    }
+});
+
 // 404 for API routes
 app.use('/api/*', (req, res) => {
     res.status(404).json({ success: false, message: 'API endpoint không tồn tại' });
