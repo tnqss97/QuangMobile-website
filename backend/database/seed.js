@@ -15,15 +15,11 @@ async function seed() {
     console.log('🌱 Seeding data...');
     
     // ===== USERS =====
-    const adminEmail = process.env.ADMIN_EMAIL || 'admin@quangmobile.vn';
-    const adminPwd = bcrypt.hashSync(process.env.ADMIN_PASSWORD || 'Admin@123', 10);
-    const userPwd = bcrypt.hashSync('User@123', 10);
+    const adminEmail = process.env.ADMIN_EMAIL || 'admin@quangmobile.store';
+    const adminPwd = bcrypt.hashSync(process.env.ADMIN_PASSWORD || 'admin123', 10);
     
     await db.prepare(`INSERT INTO users (email, password, full_name, phone, role) VALUES (?, ?, ?, ?, ?)`).run(
-        adminEmail, adminPwd, 'Quản trị viên', '0123456789', 'admin'
-    );
-    await db.prepare(`INSERT INTO users (email, password, full_name, phone, role) VALUES (?, ?, ?, ?, ?)`).run(
-        'user@example.com', userPwd, 'Nguyễn Văn An', '0987654321', 'user'
+        adminEmail, adminPwd, 'Quản trị viên', '0355668897', 'admin'
     );
     
     // ===== CATEGORIES =====
@@ -207,8 +203,7 @@ async function seed() {
     }
     
     console.log('✅ Database seeded successfully!');
-    console.log(`👤 Admin: ${adminEmail} / ${process.env.ADMIN_PASSWORD || 'Admin@123'}`);
-    console.log(`👤 User:  user@example.com / User@123`);
+    console.log(`👤 Admin: ${adminEmail}`);
     console.log(`📦 ${products.length} products, ${categories.length} categories, ${brands.length} brands`);
     console.log(`📰 ${newsList.length} news, ${coupons.length} coupons`);
     

@@ -49,18 +49,6 @@
                     </button>
                 </form>
                 
-                <div class="auth-divider"><span>hoặc</span></div>
-                
-                <div class="auth-demo">
-                    <p>Tài khoản demo:</p>
-                    <button class="btn btn-outline-dark btn-full" onclick="fillDemo('user')">
-                        <i class="fas fa-user"></i> Khách hàng (user@example.com)
-                    </button>
-                    <button class="btn btn-outline-dark btn-full" onclick="fillDemo('admin')">
-                        <i class="fas fa-user-shield"></i> Quản trị (admin@quangmobile.vn)
-                    </button>
-                </div>
-                
                 <div class="auth-footer">
                     Chưa có tài khoản? <a href="register.html">Đăng ký ngay</a>
                 </div>
@@ -89,16 +77,6 @@
                 icon.classList.replace('fa-eye-slash', 'fa-eye');
             }
         });
-        
-        function fillDemo(type) {
-            if (type === 'admin') {
-                document.getElementById('email').value = 'admin@quangmobile.vn';
-                document.getElementById('password').value = 'Admin@123';
-            } else {
-                document.getElementById('email').value = 'user@example.com';
-                document.getElementById('password').value = 'User@123';
-            }
-        }
         
         document.getElementById('loginForm').addEventListener('submit', async (e) => {
             e.preventDefault();
