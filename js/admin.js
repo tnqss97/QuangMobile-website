@@ -410,9 +410,22 @@ async function openProductModal(productId = null) {
                         <div class="form-section">
                             <h4>Hình ảnh & Hiển thị</h4>
                             <div class="form-group">
-                                <label>Đường dẫn hình ảnh</label>
-                                <input type="text" name="image" placeholder="images/phone1.svg" value="${product?.image || 'images/phone1.svg'}">
-                                <small>Mặc định: images/phone1.svg, images/phone2.svg, images/accessory1.svg...</small>
+                                <label>Hình ảnh sản phẩm</label>
+                                <div class="image-upload-area">
+                                    <div class="image-preview" id="imagePreview">
+                                        ${product?.image ? `<img src="${product.image}" alt="Preview">` : '<i class="fas fa-cloud-upload-alt"></i><span>Chọn ảnh từ máy tính</span>'}
+                                    </div>
+                                    <div class="image-upload-controls">
+                                        <input type="file" id="imageFile" accept="image/*" style="display:none">
+                                        <button type="button" class="btn btn-outline-primary btn-sm" onclick="document.getElementById('imageFile').click()">
+                                            <i class="fas fa-upload"></i> Chọn ảnh
+                                        </button>
+                                        <span class="upload-status" id="uploadStatus"></span>
+                                    </div>
+                                    <input type="hidden" name="image" id="imageUrl" value="${product?.image || 'images/phone1.svg'}">
+                                    <small>Chọn ảnh từ máy tính (JPG, PNG, WebP) hoặc nhập URL trực tiếp bên dưới</small>
+                                    <input type="text" id="imageUrlManual" placeholder="Hoặc nhập URL ảnh..." value="${product?.image || ''}" style="margin-top:8px">
+                                </div>
                             </div>
                             <div class="form-row">
                                 <div class="form-group">
@@ -454,6 +467,58 @@ async function openProductModal(productId = null) {
     modal.querySelector('.modal-cancel').addEventListener('click', () => modal.remove());
     modal.addEventListener('click', (e) => {
         if (e.target === modal) modal.remove();
+    });
+    
+    // Image upload handler
+    const imageFileInput = modal.querySelector('#imageFile');
+    const imagePreview = modal.querySelector('#imagePreview');
+    const imageUrlInput = modal.querySelector('#imageUrl');
+    const imageUrlManual = modal.querySelector('#imageUrlManual');
+    const uploadStatus = modal.querySelector('#uploadStatus');
+    
+    imageFileInput.addEventListener('change', async (e) => {
+        const file = e.target.files[0];
+        if (!file) return;
+        
+        // Validate
+        if (!file.type.startsWith('image/')) {
+            showToast('Vui lòng chọn file ảnh', 'error');
+            return;
+        }
+        if (file.size > 5 * 1024 * 1024) {
+            showToast('Ảnh quá lớn (tối đa 5MB)', 'error');
+            return;
+        }
+        
+        // Show preview immediately
+        const reader = new FileReader();
+        reader.onload = async (ev) => {
+            const base64 = ev.target.result;
+            imagePreview.innerHTML = `<img src="${base64}" alt="Preview">`;
+            
+            // Upload to server
+            uploadStatus.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang upload...';
+            
+            try {
+                const res = await API.uploadImage(base64);
+                imageUrlInput.value = res.data.url;
+                imageUrlManual.value = res.data.url;
+                uploadStatus.innerHTML = '<i class="fas fa-check-circle" style="color:var(--success)"></i> Upload thành công';
+            } catch (err) {
+                uploadStatus.innerHTML = `<i class="fas fa-exclamation-circle" style="color:var(--danger)"></i> ${err.message}`;
+                // Fallback: keep base64 as preview but use placeholder URL
+                imageUrlInput.value = 'images/phone1.svg';
+            }
+        };
+        reader.readAsDataURL(file);
+    });
+    
+    // Manual URL input sync
+    imageUrlManual.addEventListener('input', (e) => {
+        imageUrlInput.value = e.target.value;
+        if (e.target.value) {
+            imagePreview.innerHTML = `<img src="${e.target.value}" alt="Preview" onerror="this.src='images/phone1.svg'">`;
+        }
     });
     
     // Form submit handler

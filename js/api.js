@@ -69,6 +69,9 @@ const API = {
     updateProduct: (id, data) => apiRequest(`/products/${id}`, { method: 'PUT', body: JSON.stringify(data) }),
     deleteProduct: (id) => apiRequest(`/products/${id}`, { method: 'DELETE' }),
     
+    // Upload
+    uploadImage: (base64) => apiRequest('/upload', { method: 'POST', body: JSON.stringify({ image: base64 }) }),
+    
     // Cart
     getCart: () => apiRequest('/cart'),
     addToCart: (product_id, quantity = 1) => apiRequest('/cart', {

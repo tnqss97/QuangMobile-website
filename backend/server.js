@@ -15,6 +15,7 @@ const orderRoutes = require('./routes/orders');
 const reviewRoutes = require('./routes/reviews');
 const newsRoutes = require('./routes/news');
 const miscRoutes = require('./routes/misc');
+const uploadRoutes = require('./routes/upload');
 
 const app = express();
 const PORT = process.env.PORT || 3000;
@@ -43,8 +44,8 @@ app.use(cors({
     },
     credentials: true
 }));
-app.use(express.json({ limit: '5mb' }));
-app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '10mb' }));
+app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
 // Rate limiter for API
 const apiLimiter = rateLimit({
@@ -107,6 +108,7 @@ app.use('/api/cart', cartRoutes);
 app.use('/api/orders', orderRoutes);
 app.use('/api/reviews', reviewRoutes);
 app.use('/api/news', newsRoutes);
+app.use('/api/upload', uploadRoutes);
 app.use('/api', miscRoutes);
 
 // ===== FRONTEND ROUTING =====
