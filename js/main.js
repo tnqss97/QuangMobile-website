@@ -213,25 +213,87 @@ const searchBar = document.querySelector('.search-bar');
 if (searchBar) {
     const searchInput = searchBar.querySelector('input');
     const searchBtn = searchBar.querySelector('button');
-
-    function performSearch() {
-        const query = searchInput.value.trim();
-        if (query) {
-            showToast(`Tìm kiếm: "${query}"`);
-        } else {
-            showToast('Vui lòng nhập từ khóa tìm kiếm', 'error');
+    
+    // Create suggestions dropdown
+    const suggestionsDiv = document.createElement('div');
+    suggestionsDiv.className = 'search-suggestions';
+    suggestionsDiv.style.display = 'none';
+    searchBar.appendChild(suggestionsDiv);
+    searchBar.style.position = 'relative';
+    
+    let searchTimer;
+    
+    searchInput.addEventListener('input', (e) => {
+        const q = e.target.value.trim();
+        clearTimeout(searchTimer);
+        
+        if (q.length < 2) {
+            suggestionsDiv.style.display = 'none';
+            return;
         }
-    }
-
-    searchBtn.addEventListener('click', (e) => {
-        e.preventDefault();
-        performSearch();
+        
+        searchTimer = setTimeout(async () => {
+            try {
+                if (!window.API) return;
+                const res = await API.searchSuggestions(q);
+                if (res.data && res.data.length > 0) {
+                    suggestionsDiv.innerHTML = res.data.map(p => `
+                        <a href="product.html?slug=${p.slug}" class="suggestion-item">
+                            <img src="${p.image}" onerror="this.src='images/phone1.svg'" alt="">
+                            <div class="suggestion-info">
+                                <span class="suggestion-name">${p.name}</span>
+                                <span class="suggestion-price">${formatCurrency(p.price)}</span>
+                            </div>
+                            <span class="suggestion-category">${p.category_name || ''}</span>
+                        </a>
+                    `).join('') + `
+                        <a href="products.html?search=${encodeURIComponent(q)}" class="suggestion-all">
+                            Xem tất cả kết quả cho "${q}" <i class="fas fa-arrow-right"></i>
+                        </a>
+                    `;
+                    suggestionsDiv.style.display = 'block';
+                } else {
+                    suggestionsDiv.innerHTML = '<div class="suggestion-empty">Không tìm thấy sản phẩm</div>';
+                    suggestionsDiv.style.display = 'block';
+                }
+            } catch (err) {
+                suggestionsDiv.style.display = 'none';
+            }
+        }, 300);
     });
-
+    
+    // Hide suggestions when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!searchBar.contains(e.target)) {
+            suggestionsDiv.style.display = 'none';
+        }
+    });
+    
+    // Search on Enter
     searchInput.addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             e.preventDefault();
-            performSearch();
+            const q = searchInput.value.trim();
+            if (q) {
+                suggestionsDiv.style.display = 'none';
+                window.location.href = `products.html?search=${encodeURIComponent(q)}`;
+            }
+        }
+    });
+    
+    searchBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        const q = searchInput.value.trim();
+        if (q) {
+            suggestionsDiv.style.display = 'none';
+            window.location.href = `products.html?search=${encodeURIComponent(q)}`;
+        }
+    });
+    
+    // Show suggestions on focus if has value
+    searchInput.addEventListener('focus', () => {
+        if (searchInput.value.trim().length >= 2 && suggestionsDiv.innerHTML) {
+            suggestionsDiv.style.display = 'block';
         }
     });
 }

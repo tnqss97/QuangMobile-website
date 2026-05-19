@@ -112,4 +112,18 @@ router.post('/', authenticate, authorize('admin'), async (req, res, next) => {
     } catch (err) { next(err); }
 });
 
+// DELETE /api/news/:id (admin)
+router.delete('/:id', authenticate, authorize('admin'), async (req, res, next) => {
+    try {
+        const id = parseInt(req.params.id);
+        if (isNaN(id)) return res.status(400).json({ success: false, message: 'ID không hợp lệ' });
+        
+        const result = await db.prepare('DELETE FROM news WHERE id = ?').run(id);
+        if (result.changes === 0) {
+            return res.status(404).json({ success: false, message: 'Không tìm thấy' });
+        }
+        res.json({ success: true, message: 'Đã xóa bài viết' });
+    } catch (err) { next(err); }
+});
+
 module.exports = router;

@@ -3341,3 +3341,105 @@ body.fullpage-active .fullpage-section .animate-on-scroll {
         transition: background 0.3s ease;
     }
 }
+
+/* ===== SEARCH SUGGESTIONS ===== */
+.search-suggestions {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background: var(--white);
+    border-radius: 0 0 var(--radius) var(--radius);
+    box-shadow: var(--shadow-lg);
+    z-index: 1000;
+    max-height: 400px;
+    overflow-y: auto;
+    border: 1px solid var(--border);
+    border-top: none;
+}
+
+.suggestion-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    transition: background 0.2s;
+    border-bottom: 1px solid var(--border);
+}
+
+.suggestion-item:hover {
+    background: var(--bg-alt);
+}
+
+.suggestion-item img {
+    width: 45px;
+    height: 45px;
+    object-fit: contain;
+    background: var(--bg);
+    border-radius: var(--radius-sm);
+    padding: 4px;
+    flex-shrink: 0;
+}
+
+.suggestion-info {
+    flex: 1;
+    min-width: 0;
+}
+
+.suggestion-name {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 500;
+    color: var(--secondary);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.suggestion-price {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary);
+}
+
+.suggestion-category {
+    font-size: 0.75rem;
+    color: var(--text-lighter);
+    background: var(--bg);
+    padding: 3px 8px;
+    border-radius: var(--radius-full);
+    flex-shrink: 0;
+}
+
+.suggestion-all {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px;
+    color: var(--primary);
+    font-weight: 600;
+    font-size: 0.9rem;
+    transition: background 0.2s;
+}
+
+.suggestion-all:hover {
+    background: var(--bg-alt);
+}
+
+.suggestion-empty {
+    padding: 20px;
+    text-align: center;
+    color: var(--text-lighter);
+    font-size: 0.9rem;
+}
+
+@media (max-width: 768px) {
+    .search-suggestions {
+        position: fixed;
+        top: auto;
+        left: 10px;
+        right: 10px;
+        max-height: 60vh;
+    }
+}

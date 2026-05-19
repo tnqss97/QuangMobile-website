@@ -12,6 +12,15 @@ function parseProduct(p) {
     if (p.images && typeof p.images === 'string') {
         try { p.images = JSON.parse(p.images); } catch (e) { p.images = []; }
     }
+    // Ensure numeric fields
+    p.price = parseInt(p.price) || 0;
+    p.old_price = p.old_price ? parseInt(p.old_price) : null;
+    p.stock = parseInt(p.stock) || 0;
+    p.sold = parseInt(p.sold) || 0;
+    p.views = parseInt(p.views) || 0;
+    p.avg_rating = p.avg_rating ? parseFloat(p.avg_rating) : 0;
+    p.review_count = parseInt(p.review_count) || 0;
+    p.featured = parseInt(p.featured) || 0;
     return p;
 }
 
@@ -104,6 +113,32 @@ router.get('/', async (req, res, next) => {
                 total_pages: Math.ceil(total / limitNum)
             }
         });
+    } catch (err) { next(err); }
+});
+
+// GET /api/products/search-suggestions?q=...
+router.get('/search-suggestions', async (req, res, next) => {
+    try {
+        const q = (req.query.q || '').trim();
+        if (q.length < 2) {
+            return res.json({ success: true, data: [] });
+        }
+        
+        const products = await db.prepare(`
+            SELECT id, name, slug, image, price, old_price, category_id,
+                   (SELECT c.name FROM categories c WHERE c.id = p.category_id) AS category_name
+            FROM products p
+            WHERE p.status = 'active' AND (p.name ILIKE ? OR p.short_description ILIKE ?)
+            ORDER BY p.sold DESC
+            LIMIT 6
+        `).all(`%${q}%`, `%${q}%`);
+        
+        products.forEach(p => {
+            p.price = parseInt(p.price) || 0;
+            p.old_price = p.old_price ? parseInt(p.old_price) : null;
+        });
+        
+        res.json({ success: true, data: products });
     } catch (err) { next(err); }
 });
 

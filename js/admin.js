@@ -17,6 +17,7 @@ const tabs = {
     products: { title: 'Quản lý sản phẩm', render: renderProducts },
     categories: { title: 'Quản lý danh mục', render: renderCategories },
     brands: { title: 'Quản lý thương hiệu', render: renderBrands },
+    news: { title: 'Quản lý tin tức', render: renderNews },
     contacts: { title: 'Tin nhắn liên hệ', render: renderContacts }
 };
 
@@ -942,6 +943,195 @@ async function renderContacts() {
         container.innerHTML = `<div class="error-state">${err.message}</div>`;
     }
 }
+
+// ===== NEWS CRUD =====
+async function renderNews() {
+    const container = document.getElementById('adminContent');
+    container.innerHTML = '<div class="loading-state"><i class="fas fa-spinner fa-spin"></i></div>';
+    
+    try {
+        const res = await API.getNews({ limit: 50 });
+        const news = res.data;
+        
+        container.innerHTML = `
+            <div class="admin-toolbar">
+                <h3 style="margin:0">Tổng cộng: ${news.length} bài viết</h3>
+                <div style="margin-left:auto"></div>
+                <button class="btn btn-primary" onclick="openNewsModal()">
+                    <i class="fas fa-plus"></i> Thêm bài viết
+                </button>
+            </div>
+            <div class="dashboard-card">
+                <table class="admin-table">
+                    <thead>
+                        <tr>
+                            <th>Ảnh</th>
+                            <th>Tiêu đề</th>
+                            <th>Chuyên mục</th>
+                            <th>Lượt xem</th>
+                            <th>Ngày tạo</th>
+                            <th>Hành động</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        ${news.length === 0 ? '<tr><td colspan="6" style="text-align:center;padding:30px;color:#999">Chưa có bài viết</td></tr>' : 
+                        news.map(n => `
+                            <tr>
+                                <td><img src="${n.image || 'images/news1.svg'}" class="admin-thumb" onerror="this.src='images/news1.svg'"></td>
+                                <td>
+                                    <strong>${n.title}</strong>
+                                    ${n.featured ? '<span class="featured-badge"><i class="fas fa-star"></i></span>' : ''}
+                                </td>
+                                <td>${n.category || '-'}</td>
+                                <td>${n.views || 0}</td>
+                                <td>${formatDate(n.created_at)}</td>
+                                <td>
+                                    <button class="btn-icon btn-danger" onclick="deleteNews(${n.id}, '${n.title.replace(/'/g, "\\'").substring(0, 30)}')" title="Xóa">
+                                        <i class="fas fa-trash"></i>
+                                    </button>
+                                </td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    } catch (err) {
+        container.innerHTML = `<div class="error-state">${err.message}</div>`;
+    }
+}
+
+function openNewsModal() {
+    document.querySelectorAll('.modal-overlay').forEach(m => m.remove());
+    
+    const modal = document.createElement('div');
+    modal.className = 'modal-overlay';
+    modal.innerHTML = `
+        <div class="modal-content modal-large">
+            <div class="modal-header">
+                <h3><i class="fas fa-plus"></i> Thêm bài viết mới</h3>
+                <button type="button" class="modal-close">×</button>
+            </div>
+            <div class="modal-body">
+                <form id="newsForm">
+                    <div class="form-section">
+                        <h4>Thông tin bài viết</h4>
+                        <div class="form-group">
+                            <label>Tiêu đề <span class="required">*</span></label>
+                            <input type="text" name="title" required placeholder="Tiêu đề bài viết">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label>Chuyên mục</label>
+                                <select name="category">
+                                    <option value="">-- Chọn --</option>
+                                    <option value="Điện thoại">Điện thoại</option>
+                                    <option value="Phụ kiện">Phụ kiện</option>
+                                    <option value="Mẹo hay">Mẹo hay</option>
+                                    <option value="So sánh">So sánh</option>
+                                    <option value="AI & Mobile">AI & Mobile</option>
+                                    <option value="Đánh giá">Đánh giá</option>
+                                    <option value="Khuyến mãi">Khuyến mãi</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label>Tags (phân cách bằng dấu phẩy)</label>
+                                <input type="text" name="tags" placeholder="iphone, samsung, review">
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label>Tóm tắt</label>
+                            <textarea name="excerpt" rows="2" placeholder="Mô tả ngắn hiển thị ở danh sách bài viết..."></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label>Nội dung <span class="required">*</span></label>
+                            <textarea name="content" rows="10" required placeholder="Nội dung đầy đủ bài viết..."></textarea>
+                        </div>
+                    </div>
+                    <div class="form-section">
+                        <h4>Hình ảnh & Hiển thị</h4>
+                        <div class="form-group">
+                            <label>URL hình ảnh đại diện</label>
+                            <input type="text" name="image" placeholder="https://... hoặc images/news1.svg" value="images/news1.svg">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="checkbox-inline">
+                                    <input type="checkbox" name="featured">
+                                    Bài viết nổi bật
+                                </label>
+                            </div>
+                            <div class="form-group">
+                                <label>Trạng thái</label>
+                                <select name="status">
+                                    <option value="published">Xuất bản</option>
+                                    <option value="draft">Bản nháp</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-actions">
+                        <button type="button" class="btn btn-outline-primary modal-cancel">Hủy</button>
+                        <button type="submit" class="btn btn-primary"><i class="fas fa-save"></i> Đăng bài</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    `;
+    document.body.appendChild(modal);
+    
+    modal.querySelector('.modal-close').addEventListener('click', () => modal.remove());
+    modal.querySelector('.modal-cancel').addEventListener('click', () => modal.remove());
+    let mdOverlay = false;
+    modal.addEventListener('mousedown', (e) => { mdOverlay = (e.target === modal); });
+    modal.addEventListener('mouseup', (e) => { if (mdOverlay && e.target === modal) modal.remove(); mdOverlay = false; });
+    
+    modal.querySelector('#newsForm').addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const fd = new FormData(e.target);
+        const data = {};
+        for (const [key, value] of fd.entries()) data[key] = value;
+        
+        // Auto-generate slug from title
+        data.slug = data.title.toLowerCase().trim()
+            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
+            .replace(/đ/g, 'd').replace(/\s+/g, '-')
+            .replace(/[^\w\-]+/g, '').replace(/\-\-+/g, '-')
+            .replace(/^-+|-+$/g, '') + '-' + Date.now().toString(36);
+        
+        data.featured = modal.querySelector('[name="featured"]').checked;
+        
+        const btn = e.target.querySelector('button[type="submit"]');
+        const original = btn.innerHTML;
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Đang lưu...';
+        btn.disabled = true;
+        
+        try {
+            await apiRequest('/news', { method: 'POST', body: JSON.stringify(data) });
+            showToast('Đã đăng bài viết');
+            modal.remove();
+            renderNews();
+        } catch (err) {
+            showToast(err.message, 'error');
+            btn.innerHTML = original;
+            btn.disabled = false;
+        }
+    });
+}
+
+async function deleteNews(id, title) {
+    if (!confirm(`Xóa bài viết "${title}..."?`)) return;
+    try {
+        await apiRequest(`/news/${id}`, { method: 'DELETE' });
+        showToast('Đã xóa bài viết');
+        renderNews();
+    } catch (err) {
+        showToast(err.message, 'error');
+    }
+}
+
+window.openNewsModal = openNewsModal;
+window.deleteNews = deleteNews;
 
 function logout() {
     Auth.clearToken();
