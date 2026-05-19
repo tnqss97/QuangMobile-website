@@ -465,8 +465,17 @@ async function openProductModal(productId = null) {
     // Close handlers
     modal.querySelector('.modal-close').addEventListener('click', () => modal.remove());
     modal.querySelector('.modal-cancel').addEventListener('click', () => modal.remove());
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.remove();
+    
+    // Only close when BOTH mousedown and mouseup happen on overlay (not when dragging text out)
+    let mouseDownOnOverlay = false;
+    modal.addEventListener('mousedown', (e) => {
+        mouseDownOnOverlay = (e.target === modal);
+    });
+    modal.addEventListener('mouseup', (e) => {
+        if (mouseDownOnOverlay && e.target === modal) {
+            modal.remove();
+        }
+        mouseDownOnOverlay = false;
     });
     
     // Image upload handler
