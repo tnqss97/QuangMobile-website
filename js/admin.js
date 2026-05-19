@@ -607,7 +607,7 @@ async function deleteProduct(id, name) {
 }
 
 function closeModal(e) {
-    if (e && e.target.closest('.modal-content') && !e.target.closest('.modal-close')) return;
+    // Legacy function - kept for backward compat
     document.querySelectorAll('.modal-overlay').forEach(m => m.remove());
 }
 
@@ -737,9 +737,9 @@ async function openCategoryModal(categoryId = null) {
     
     modal.querySelector('.modal-close').addEventListener('click', () => modal.remove());
     modal.querySelector('.modal-cancel').addEventListener('click', () => modal.remove());
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.remove();
-    });
+    let mdCat = false;
+    modal.addEventListener('mousedown', (e) => { mdCat = (e.target === modal); });
+    modal.addEventListener('mouseup', (e) => { if (mdCat && e.target === modal) modal.remove(); mdCat = false; });
     
     // Icon picker visual selection
     modal.querySelectorAll('.icon-option input').forEach(input => {
@@ -869,9 +869,9 @@ function openBrandModal() {
     
     modal.querySelector('.modal-close').addEventListener('click', () => modal.remove());
     modal.querySelector('.modal-cancel').addEventListener('click', () => modal.remove());
-    modal.addEventListener('click', (e) => {
-        if (e.target === modal) modal.remove();
-    });
+    let mdBrand = false;
+    modal.addEventListener('mousedown', (e) => { mdBrand = (e.target === modal); });
+    modal.addEventListener('mouseup', (e) => { if (mdBrand && e.target === modal) modal.remove(); mdBrand = false; });
     
     modal.querySelector('#brandForm').addEventListener('submit', async (e) => {
         e.preventDefault();

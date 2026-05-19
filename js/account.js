@@ -228,11 +228,11 @@ async function viewOrder(code) {
         const res = await API.getOrder(code);
         const o = res.data;
         const html = `
-            <div class="modal-overlay" onclick="this.remove()">
+            <div class="modal-overlay" id="orderDetailModal">
                 <div class="modal-content" onclick="event.stopPropagation()">
                     <div class="modal-header">
                         <h3>Chi tiết đơn hàng #${o.order_code}</h3>
-                        <button class="modal-close" onclick="this.closest('.modal-overlay').remove()">×</button>
+                        <button class="modal-close" onclick="document.getElementById('orderDetailModal').remove()">×</button>
                     </div>
                     <div class="modal-body">
                         <div class="order-detail-info">
@@ -266,6 +266,12 @@ async function viewOrder(code) {
             </div>
         `;
         document.body.insertAdjacentHTML('beforeend', html);
+        
+        // Safe close: only when mousedown AND mouseup both on overlay
+        const orderModal = document.getElementById('orderDetailModal');
+        let mdOrder = false;
+        orderModal.addEventListener('mousedown', (e) => { mdOrder = (e.target === orderModal); });
+        orderModal.addEventListener('mouseup', (e) => { if (mdOrder && e.target === orderModal) orderModal.remove(); mdOrder = false; });
     } catch (err) {
         showToast(err.message, 'error');
     }
